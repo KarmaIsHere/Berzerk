@@ -4,32 +4,30 @@ namespace Berzerk
 {
     public partial class Form1 : Form
     {
-        int playerSpeed = 2;
-        int bulletSpeed = 3;
         Player myPlayer;
 
         public Form1()
         {
-            myPlayer = new Player();
             InitializeComponent();
+            myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
             gameRestart();
         }
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
-            if (myPlayer.goUp == true && player.Top > 0)
+            if (myPlayer.goUp == true && old_player.Top > 0)
             {
                 myPlayer.moveUp();
             }
-            if (myPlayer.goDown == true && player.Bottom < 524)
+            if (myPlayer.goDown == true && old_player.Bottom < 524)
             {
                 myPlayer.moveDown();
             }
-            if (myPlayer.goLeft == true && player.Left > 0)
+            if (myPlayer.goLeft == true && old_player.Left > 0)
             {
                 myPlayer.moveLeft();
             }
-            if (myPlayer.goRight == true && player.Right < 1156)
+            if (myPlayer.goRight == true && old_player.Right < 1156)
             {
                 myPlayer.moveRight();
             }
@@ -66,16 +64,16 @@ namespace Berzerk
                 switch (myPlayer.getDirection())
                 {
                     case Player.Direction.Up:
-                        spawnBullet(-30, player.Width / 2);
+                        spawnBullet(-30, old_player.Width / 2);
                         break;
                     case Player.Direction.Down:
-                        spawnBullet(60, player.Width / 2);
+                        spawnBullet(60, old_player.Width / 2);
                         break;
                     case Player.Direction.Left:
-                        spawnBullet(player.Height / 2 , -30);
+                        spawnBullet(old_player.Height / 2 , -30);
                         break;
                     case Player.Direction.Right:
-                        spawnBullet(player.Height / 2 , 30);
+                        spawnBullet(old_player.Height / 2 , 30);
                         break;
                 }
             }
