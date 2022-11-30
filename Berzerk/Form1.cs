@@ -1,4 +1,5 @@
 using Berzerk.model;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Berzerk
 {
@@ -60,21 +61,21 @@ namespace Berzerk
             if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
             {
                 myPlayer.shooting = true;
-                Bullet bullet = new Bullet(3);
+                Bullet bullet = new Bullet(6, myPlayer, this);
 
                 switch (myPlayer.getDirection())
                 {
                     case Player.Direction.Up:
-                        bullet.spawnBullet(-30, old_player.Width / 2, myPlayer);
+                        bullet.spawnBullet(new Tuple<int,int>(-30, myPlayer.width / 2), myPlayer);
                         break;
                     case Player.Direction.Down:
-                        bullet.spawnBullet(60, old_player.Width / 2, myPlayer);
+                        bullet.spawnBullet(new Tuple<int,int>(-60, myPlayer.width / 2), myPlayer);
                         break;
                     case Player.Direction.Left:
-                        bullet.spawnBullet(old_player.Height / 2 , -30, myPlayer);
+                        bullet.spawnBullet(new Tuple<int,int>(-30, -myPlayer.height / 2), myPlayer);
                         break;
                     case Player.Direction.Right:
-                        bullet.spawnBullet(old_player.Height / 2 , 30, myPlayer);
+                        bullet.spawnBullet(new Tuple<int,int>(-myPlayer.height / 2 , 30), myPlayer);
                         break;
                 }
             }
