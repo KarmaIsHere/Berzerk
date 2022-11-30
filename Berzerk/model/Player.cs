@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Berzerk.model
 {
@@ -18,6 +19,7 @@ namespace Berzerk.model
         private bool _goRight;
         private bool _shooting;
         private bool _moving;
+        private bool _canShoot;
         private Direction _viewDirection;
         private int _playerSpeed;
         private PictureBox _player;
@@ -30,6 +32,7 @@ namespace Berzerk.model
         public bool goRight { get => _goRight; set => _goRight = value; }
         public bool shooting { get => _shooting; set => _shooting = value; }
         public bool moving { get => _moving; set => _moving = value; }
+        public bool canShoot { get => _canShoot; set => _canShoot = value; }    
         public int x { get => _player.Top; set => _player.Top = value; }
         public int y { get => _player.Left; set => _player.Left = value; }
         public int width { get => _width; set => _width = value;}
@@ -43,16 +46,17 @@ namespace Berzerk.model
             _goRight = goRight;
             _shooting = shooting;
             _moving = moving;
+            _canShoot = true;
             _viewDirection = viewDirection;
             _playerSpeed = playerSpeed;
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._player = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
             // 
             // player
             // 
-            //this._player.Image = (Image.FromFile("C:\\Users\\ACER\\Source\\Repos\\KarmaIsHere\\Berzerk\\Berzerk\\Properties\\images\\player.png"));
+            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");
+            //this._player.ImageLocation = @"C:\Users\ACER\Source\Repos\KarmaIsHere\Berzerk\Berzerk\Properties\images\player.png";
             this._player.Location = new System.Drawing.Point(x, y);
             this._player.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._player.Name = "player";
@@ -60,7 +64,7 @@ namespace Berzerk.model
             this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._player.TabIndex = 0;
             this._player.TabStop = false;
-            this._player.BackColor = Color.White;
+            //this._player.BackColor = Color.White;
 
             this.x = x;
             this.y = y;

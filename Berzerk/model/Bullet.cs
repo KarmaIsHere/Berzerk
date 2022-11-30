@@ -4,19 +4,22 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using static Berzerk.model.Player;
 
 namespace Berzerk.model
 {
-    internal class Bullet : Form
+    public class Bullet : Form
     {
+        public enum Direction { Up, Down, Left, Right };
         //private int _x;
         //private int _y;
         private int _bulletSpeed;
         private PictureBox _bullet;
+        private Direction _viewDirection;
 
-
-
-        public Bullet(int bulletSpeed, Player myPlayer, Form form)
+        static Bullet instance;
+        private static object locker = new object();
+        protected Bullet(int bulletSpeed, Player myPlayer, Form form, bool temp)
         {
             this._bulletSpeed = bulletSpeed;
 
@@ -28,11 +31,34 @@ namespace Berzerk.model
             this._bullet.Size = new System.Drawing.Size(11, 13);
             this._bullet.TabIndex = 1;
             this._bullet.TabStop = false;
-            this._bullet.Location =  new System.Drawing.Point(0,0);
-            
+            this._bullet.Location = new System.Drawing.Point(0, 0);
+
             form.Controls.Add(this._bullet);
         }
 
+        public static Bullet GetBullet(int bulletSpeed, Player myPlayer, Form form)
+        {
+            if (instance == null)
+            {
+                lock (locker)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Bullet(bulletSpeed, myPlayer, form, true);
+                    }
+                }
+            }
+            return instance;
+        }
+        public void setDirection(Direction direction)
+        {
+            _viewDirection = direction;
+        }
+
+        public Direction getDirection()
+        {
+            return _viewDirection;
+        }
         public void spawnBullet(Tuple<int, int> coordinates, Player myPlayer)
         {
             _bullet.Top = myPlayer.x + coordinates.Item1;
@@ -44,5 +70,32 @@ namespace Berzerk.model
             return new Tuple<int, int>(-30, 0);
         }
 
+        public void setCanShoot(Player myPlayer)
+        {
+            myPlayer.shooting = false;
+        }
+
+        public Tuple<int,int> moveBullet()
+        {
+            Tuple<int, int> result = new Tuple<int, int>(0, 0);
+            switch (getDirection())
+            {
+                case Direction.Up:
+                    return new Tuple<int, int>(0, -10);
+                    break;
+                case Direction.Down:
+                    return new Tuple<int, int>(0, 10);
+                    break;
+                case Direction.Left:
+                    return new Tuple<int, int>(-10, 0);
+                    break;
+                case Direction.Right:
+                    return new Tuple<int, int>(0, -10);
+                    break;
+                default:
+                    return new Tuple<int, int>(0, 0);
+                    break;
+            }
+        }
     }
 }
