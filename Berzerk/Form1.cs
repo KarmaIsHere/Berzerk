@@ -60,29 +60,24 @@ namespace Berzerk
             if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
             {
                 myPlayer.shooting = true;
+                Bullet bullet = new Bullet(3);
 
                 switch (myPlayer.getDirection())
                 {
                     case Player.Direction.Up:
-                        spawnBullet(-30, old_player.Width / 2);
+                        bullet.spawnBullet(-30, old_player.Width / 2, myPlayer);
                         break;
                     case Player.Direction.Down:
-                        spawnBullet(60, old_player.Width / 2);
+                        bullet.spawnBullet(60, old_player.Width / 2, myPlayer);
                         break;
                     case Player.Direction.Left:
-                        spawnBullet(old_player.Height / 2 , -30);
+                        bullet.spawnBullet(old_player.Height / 2 , -30, myPlayer);
                         break;
                     case Player.Direction.Right:
-                        spawnBullet(old_player.Height / 2 , 30);
+                        bullet.spawnBullet(old_player.Height / 2 , 30, myPlayer);
                         break;
                 }
             }
-        }
-
-        private void spawnBullet(int X, int Y)
-        {
-            bullet.Top = myPlayer.x + X;
-            bullet.Left = myPlayer.y + Y;
         }
 
         private void keyIsUp(object sender, KeyEventArgs e)

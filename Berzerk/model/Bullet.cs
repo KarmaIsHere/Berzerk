@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace Berzerk.model
 {
-    internal class Bullet
+    internal class Bullet : Form
     {
-        private int x;
-        private int y;
-        private int bulletSpeed;
+        private int _x;
+        private int _y;
+        private int _bulletSpeed;
+        private PictureBox bullet;
 
-        public Bullet(int x, int y, int bulletSpeed)
+        public Bullet(int bulletSpeed)
         {
-            this.x = x;
-            this.y = y;
-            this.bulletSpeed = bulletSpeed;
+            this._bulletSpeed = bulletSpeed;
         }
-
+        public void spawnBullet(int X, int Y, Player myPlayer)
+        {
+            bullet.Top = myPlayer.x + X;
+            bullet.Left = myPlayer.y + Y;
+        }
     }
 }

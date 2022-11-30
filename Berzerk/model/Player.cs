@@ -99,9 +99,5 @@ namespace Berzerk.model
             _player.Left += _playerSpeed;
             setDirection(Player.Direction.Right);
         }
-
-
-
-
     }
 }
