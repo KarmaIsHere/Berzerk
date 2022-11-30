@@ -37,7 +37,6 @@ namespace Berzerk
             {
                 Bullet bullet = Bullet.GetBullet(7, myPlayer, this);
                 bulletsList.Add(bullet);
-                bullet.setDirection(myPlayer.getDirection());
                 switch (myPlayer.getDirection())
                 {
                     case Player.Direction.Up:
