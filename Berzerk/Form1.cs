@@ -1,4 +1,5 @@
 using Berzerk.model;
+using System;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Berzerk
@@ -9,11 +10,13 @@ namespace Berzerk
         int windowWidth;
         Player myPlayer;
         Bullet? bullet;
+        Enemy enemy;
         List<Bullet> bulletsList = new List<Bullet>();
 
         public Form1()
         {
             InitializeComponent();
+            enemy = new Enemy(this);
             myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
             gameRestart();
             windowHeight = this.Height;
@@ -22,26 +25,26 @@ namespace Berzerk
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
-            if (myPlayer.goUp && old_player.Top > 0)
+            if (myPlayer.goUp && myPlayer.getPlayerY() > 0)
             {
                 myPlayer.moveUp();
             }
-            if (myPlayer.goDown && old_player.Bottom < 524)
+            if (myPlayer.goDown && myPlayer.getPlayerY() < 524)
             {
                 myPlayer.moveDown();
             }
-            if (myPlayer.goLeft && old_player.Left > 0)
+            if (myPlayer.goLeft && myPlayer.getPlayerX() > 0)
             {
                 myPlayer.moveLeft();
             }
-            if (myPlayer.goRight && old_player.Right < 1156)
+            if (myPlayer.goRight && myPlayer.getPlayerX() < 1156)
             {
                 myPlayer.moveRight();
             }
             if (myPlayer.shooting && myPlayer.ammo > 0)
             {
                 myPlayer.shoot();
-                bullet = new Bullet(7, myPlayer, this);
+                bullet = new Bullet(12, myPlayer, this);
                 bulletsList.Add(bullet);
                 switch (myPlayer.getDirection())
                 {
@@ -68,7 +71,7 @@ namespace Berzerk
             {
                 if (entity is PictureBox && (string)entity.Tag == "bulletEntity")
                 {
-                    foreach (Bullet bullet in this.bulletsList)
+                    foreach (Bullet bulletBox in this.bulletsList)
                     {
                         Tuple<int, int> move = bullet.moveBullet();
                         entity.Left += move.Item1;
@@ -76,18 +79,33 @@ namespace Berzerk
                     }
                     if (entity.Left > windowWidth || entity.Left < 0 || entity.Top < 0 || entity.Top > windowHeight)
                     {
-                        deleteBullet(((PictureBox)entity));
-                        bullet = null;
-                        bulletsList.RemoveAt(0);
-                        myPlayer.reload();
+                        deleteBullet(((PictureBox)entity), ref myPlayer, ref bullet);
+                        
+                    }
+                    foreach (Control enemyBox in this.Controls)
+                    {
+                        if ((string)enemyBox.Tag == "enemy" && enemyBox.Bounds.IntersectsWith(entity.Bounds))
+                        {
+                            killEnemy(((PictureBox)entity), ((PictureBox)enemyBox), ref myPlayer, ref bullet);
+                        }
                     }
                 }
             }
         }
-        private void deleteBullet(PictureBox bullet)
+        private void killEnemy(PictureBox bulletBox,PictureBox enemyBox, ref Player myPlayer, ref Bullet bullet)
+        {
+            deleteBullet(bulletBox, ref myPlayer, ref bullet);
+
+            this.Controls.Remove(enemy);
+            enemyBox.Dispose();
+        }
+        private void deleteBullet(PictureBox bulletBox, ref Player myPlayer, ref Bullet bullet)
         {
             this.Controls.Remove(bullet);
-            bullet.Dispose();
+            bulletBox.Dispose();
+            bullet = null;
+            bulletsList.RemoveAt(0);
+            myPlayer.reload();
         }
 
         private void keyIsDown(object sender, KeyEventArgs e)
@@ -112,7 +130,6 @@ namespace Berzerk
                 myPlayer.goRight = true;
                 myPlayer.moving = true;
             }
-
             if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
             {
                 myPlayer.shooting = true;

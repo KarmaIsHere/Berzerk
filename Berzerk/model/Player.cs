@@ -63,7 +63,8 @@ namespace Berzerk.model
             //this._player.ImageLocation = @"C:\Users\ACER\Source\Repos\KarmaIsHere\Berzerk\Berzerk\Properties\images\player.png";
             this._player.Location = new System.Drawing.Point(x, y);
             this._player.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this._player.Name = "player";
+            this._player.Name = "playerCharacter";
+            this._player.Tag = "player";
             this._player.Size = new System.Drawing.Size(18, 53);
             this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._player.TabIndex = 0;
@@ -113,14 +114,25 @@ namespace Berzerk.model
             setDirection(Player.Direction.Right);
         }
 
-        internal void shoot()
+        public void shoot()
         {
             _ammo -= 1;
         }
 
-        internal void reload()
+        public void reload()
         {
             _ammo = maxAmmoSize;
         }
+
+        public int getPlayerX()
+        {
+            return _player.Left;
+        }
+         public int getPlayerY()
+        {
+            return _player.Top;
+        }
+
+
     }
 }

@@ -57,25 +57,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="old_player.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABIAAAA1CAYAAABMZ7vZAAAABGdBTUEAALGPC/xhBQAAAOtJREFUWEft
-        1UFqw0AQRFGdxAuT+98n1/AFnIzcNuPmeQpnETDoi9qU6jdope0V58v5+io1yUjuqekaiT01XSOxp6Zr
-        JPbUdI3EnpqukdhT04zke2ryKZy+T9d79Dk9X/WUfmM+8u6hx7F+5C+HxvN0aL/8i8SesTsOrTN2x6F1
-        xu44tM7YPR0SEntqukaSuogkdRFJ6iKS1EUkqYtIUheRpC4iSV1EkrqIJHURSeoiktRFJKmLSFIXkaQu
-        IkldRJK6iCR1EUnqIpLURSSpI304R+93SfThHL3fJdGHc8b7+Uc6/0zf5p8ObdsPZMCK04WTOq8AAAAA
-        SUVORK5CYII=
-</value>
-  </data>
-  <data name="enemy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAYAAAD9/drQAAAABGdBTUEAALGPC/xhBQAAAJZJREFUWEft
-        lzEOwzAMA/sGf7Avzi/6iw7pUA4GdEVsKUgKmARuo3izHpR3a3sFzRyHjmfQzHHoeAbN/A4dVdBsDJUr
-        aDaGyhU0G0PlCpqNoXIFzX5DhZ7n9hqCbnvuFdHQDLRp0RC0uYioh4YIuu35H9FZWJTGojQWpbEojUVp
-        LEqzsEhfTgh1CYtCqEtYFEJd4iJR2z93w7cc2HBsBAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="gameTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 16</value>
   </metadata>
