@@ -27,6 +27,8 @@ namespace Berzerk.model
         private int _height;
         private int _ammo;
         private int _maxAmmoSize;
+        private int _x;
+        private int _y;
 
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }
@@ -56,11 +58,8 @@ namespace Berzerk.model
 
             this._player = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
-            // 
-            // player
-            // 
-            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");
-            //this._player.ImageLocation = @"C:\Users\ACER\Source\Repos\KarmaIsHere\Berzerk\Berzerk\Properties\images\player.png";
+
+            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");   
             this._player.Location = new System.Drawing.Point(x, y);
             this._player.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._player.Name = "playerCharacter";
@@ -69,7 +68,6 @@ namespace Berzerk.model
             this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._player.TabIndex = 0;
             this._player.TabStop = false;
-            //this._player.BackColor = Color.White;
 
             this.x = x;
             this.y = y;
@@ -122,15 +120,6 @@ namespace Berzerk.model
         public void reload()
         {
             _ammo = maxAmmoSize;
-        }
-
-        public int getPlayerX()
-        {
-            return _player.Left;
-        }
-         public int getPlayerY()
-        {
-            return _player.Top;
         }
 
 

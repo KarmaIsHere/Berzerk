@@ -44,7 +44,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1176, 578);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Berzerk";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);
             this.ResumeLayout(false);

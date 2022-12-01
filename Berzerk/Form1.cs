@@ -1,3 +1,4 @@
+using Berzerk.controller;
 using Berzerk.model;
 using System;
 using System.Security.Cryptography.X509Certificates;
@@ -11,6 +12,7 @@ namespace Berzerk
         Player myPlayer;
         Bullet? bullet;
         Enemy enemy;
+        BulletController bulletController;
         List<Bullet> bulletsList = new List<Bullet>();
 
         public Form1()
@@ -21,19 +23,19 @@ namespace Berzerk
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
-            if (myPlayer.goUp && myPlayer.getPlayerY() > 0)
+            if (myPlayer.goUp && myPlayer.y > 0)
             {
                 myPlayer.moveUp();
             }
-            if (myPlayer.goDown && myPlayer.getPlayerY() < 524)
+            if (myPlayer.goDown && myPlayer.y < 524)
             {
                 myPlayer.moveDown();
             }
-            if (myPlayer.goLeft && myPlayer.getPlayerX() > 0)
+            if (myPlayer.goLeft && myPlayer.x > 0)
             {
                 myPlayer.moveLeft();
             }
-            if (myPlayer.goRight && myPlayer.getPlayerX() < 1156)
+            if (myPlayer.goRight && myPlayer.x < 1156)
             {
                 myPlayer.moveRight();
             }
@@ -42,25 +44,7 @@ namespace Berzerk
                 myPlayer.shoot();
                 bullet = new Bullet(12, myPlayer, this);
                 bulletsList.Add(bullet);
-                switch (myPlayer.getDirection())
-                {
-                    case Player.Direction.Up:
-                        bullet.setDirection(Bullet.Direction.Up);
-                        bullet.spawnBullet(new Tuple<int, int>(-30, myPlayer.width / 2), myPlayer);
-                        break;
-                    case Player.Direction.Down:
-                        bullet.setDirection(Bullet.Direction.Down);
-                        bullet.spawnBullet(new Tuple<int, int>(60, myPlayer.width / 2), myPlayer);
-                        break;
-                    case Player.Direction.Left:
-                        bullet.setDirection(Bullet.Direction.Left);
-                        bullet.spawnBullet(new Tuple<int, int>(myPlayer.height / 2, -30), myPlayer);
-                        break;
-                    case Player.Direction.Right:
-                        bullet.setDirection(Bullet.Direction.Right);
-                        bullet.spawnBullet(new Tuple<int, int>(myPlayer.height / 2, 30), myPlayer);
-                        break;
-                }
+                bulletController.setBulletDirection(ref myPlayer, ref bullet);
                 myPlayer.shooting = false;
             }
             foreach (Control entity in this.Controls)
@@ -163,13 +147,16 @@ namespace Berzerk
 
         public void gameRestart()
         {
+            windowHeight = this.Height;
+            windowWidth = this.Width;
+
             myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
+            
             enemy = new Enemy(this, 300, 300);
             enemy = new Enemy(this, 500, 300);
             enemy = new Enemy(this, 700, 500);
 
-            windowHeight = this.Height;
-            windowWidth = this.Width;
+            bulletController = new BulletController();
 
             gameTimer.Start();
         }
