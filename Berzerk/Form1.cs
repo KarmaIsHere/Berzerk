@@ -16,11 +16,7 @@ namespace Berzerk
         public Form1()
         {
             InitializeComponent();
-            enemy = new Enemy(this);
-            myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
             gameRestart();
-            windowHeight = this.Height;
-            windowWidth = this.Width;
         }
 
         private void gameTimerEvent(object sender, EventArgs e)
@@ -167,6 +163,14 @@ namespace Berzerk
 
         public void gameRestart()
         {
+            myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
+            enemy = new Enemy(this, 300, 300);
+            enemy = new Enemy(this, 500, 300);
+            enemy = new Enemy(this, 700, 500);
+
+            windowHeight = this.Height;
+            windowWidth = this.Width;
+
             gameTimer.Start();
         }
 
