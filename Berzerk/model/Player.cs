@@ -19,24 +19,27 @@ namespace Berzerk.model
         private bool _goRight;
         private bool _shooting;
         private bool _moving;
-        private bool _canShoot;
+
         private Direction _viewDirection;
         private int _playerSpeed;
         private PictureBox _player;
         private int _width;
         private int _height;
+        private int _ammo;
+        private int _maxAmmoSize;
 
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }
         public bool goLeft { get => _goLeft; set => _goLeft = value; }
         public bool goRight { get => _goRight; set => _goRight = value; }
         public bool shooting { get => _shooting; set => _shooting = value; }
-        public bool moving { get => _moving; set => _moving = value; }
-        public bool canShoot { get => _canShoot; set => _canShoot = value; }    
+        public bool moving { get => _moving; set => _moving = value; }  
         public int x { get => _player.Top; set => _player.Top = value; }
         public int y { get => _player.Left; set => _player.Left = value; }
         public int width { get => _width; set => _width = value;}
         public int height { get => _height; set => _height = value;}
+        public int ammo { get => _ammo; set => _ammo = value; } 
+        public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
         public Player(bool goUp, bool goDown, bool goLeft, bool goRight, bool shooting, bool moving, Direction viewDirection, int x, int y, int playerSpeed, Form form)
         {
@@ -46,9 +49,10 @@ namespace Berzerk.model
             _goRight = goRight;
             _shooting = shooting;
             _moving = moving;
-            _canShoot = true;
             _viewDirection = viewDirection;
             _playerSpeed = playerSpeed;
+            _ammo = 1;
+            _maxAmmoSize = 1;
 
             this._player = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
@@ -107,6 +111,16 @@ namespace Berzerk.model
         {
             _player.Left += _playerSpeed;
             setDirection(Player.Direction.Right);
+        }
+
+        internal void shoot()
+        {
+            _ammo -= 1;
+        }
+
+        internal void reload()
+        {
+            _ammo = maxAmmoSize;
         }
     }
 }

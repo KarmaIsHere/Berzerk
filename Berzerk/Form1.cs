@@ -5,7 +5,10 @@ namespace Berzerk
 {
     public partial class Form1 : Form
     {
+        int windowHeight;
+        int windowWidth;
         Player myPlayer;
+        Bullet? bullet;
         List<Bullet> bulletsList = new List<Bullet>();
 
         public Form1()
@@ -13,6 +16,8 @@ namespace Berzerk
             InitializeComponent();
             myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
             gameRestart();
+            windowHeight = this.Height;
+            windowWidth = this.Width;
         }
 
         private void gameTimerEvent(object sender, EventArgs e)
@@ -33,9 +38,10 @@ namespace Berzerk
             {
                 myPlayer.moveRight();
             }
-            if (myPlayer.shooting && myPlayer.canShoot)
+            if (myPlayer.shooting && myPlayer.ammo > 0)
             {
-                Bullet bullet = Bullet.GetBullet(7, myPlayer, this);
+                myPlayer.shoot();
+                bullet = new Bullet(7, myPlayer, this);
                 bulletsList.Add(bullet);
                 switch (myPlayer.getDirection())
                 {
@@ -56,23 +62,24 @@ namespace Berzerk
                         bullet.spawnBullet(new Tuple<int, int>(myPlayer.height / 2, 30), myPlayer);
                         break;
                 }
-                myPlayer.canShoot = false;
+                myPlayer.shooting = false;
             }
             foreach (Control entity in this.Controls)
             {
-                if (entity is PictureBox && (string)entity.Tag == "bullet")
+                if (entity is PictureBox && (string)entity.Tag == "bulletEntity")
                 {
-                    Tuple<int, int> move = new Tuple<int, int>(0, 0);
                     foreach (Bullet bullet in this.bulletsList)
                     {
-                        move = bullet.moveBullet();
+                        Tuple<int, int> move = bullet.moveBullet();
                         entity.Left += move.Item1;
                         entity.Top += move.Item2;
                     }
-
-                    if (entity.Left > 1160)
+                    if (entity.Left > windowWidth || entity.Left < 0 || entity.Top < 0 || entity.Top > windowHeight)
                     {
                         deleteBullet(((PictureBox)entity));
+                        bullet = null;
+                        bulletsList.RemoveAt(0);
+                        myPlayer.reload();
                     }
                 }
             }
@@ -109,7 +116,6 @@ namespace Berzerk
             if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
             {
                 myPlayer.shooting = true;
-               
             }
         }
 
@@ -137,7 +143,7 @@ namespace Berzerk
             }
             if (e.KeyCode == Keys.Space)
             {
-                
+                myPlayer.shooting = false;
             }
                 
         }

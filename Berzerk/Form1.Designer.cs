@@ -42,7 +42,7 @@
             // old_player
             // 
             this.old_player.Image = ((System.Drawing.Image)(resources.GetObject("old_player.Image")));
-            this.old_player.Location = new System.Drawing.Point(982, 362);
+            this.old_player.Location = new System.Drawing.Point(650, 398);
             this.old_player.Name = "old_player";
             this.old_player.Size = new System.Drawing.Size(18, 53);
             this.old_player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;

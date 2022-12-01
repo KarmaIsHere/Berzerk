@@ -13,13 +13,12 @@ namespace Berzerk.model
         public enum Direction { Up, Down, Left, Right };
         //private int _x;
         //private int _y;
-        private int _bulletSpeed;
-        private PictureBox _bullet;
-        private Direction _viewDirection;
+        protected int _bulletSpeed;
+        protected PictureBox _bullet;
+        protected Direction _viewDirection;
 
-        static Bullet instance;
-        private static object locker = new object();
-        protected Bullet(int bulletSpeed, Player myPlayer, Form form, bool temp)
+
+        public Bullet(int bulletSpeed, Player myPlayer, Form form)
         {
             this._bulletSpeed = bulletSpeed;
 
@@ -28,6 +27,7 @@ namespace Berzerk.model
             this._bullet.BackColor = System.Drawing.Color.Yellow;
             this._bullet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._bullet.Name = "bullet";
+            this._bullet.Tag = "bulletEntity";
             this._bullet.Size = new System.Drawing.Size(11, 13);
             this._bullet.TabIndex = 1;
             this._bullet.TabStop = false;
@@ -36,33 +36,19 @@ namespace Berzerk.model
             form.Controls.Add(this._bullet);
         }
 
-        public static Bullet GetBullet(int bulletSpeed, Player myPlayer, Form form)
-        {
-            if (instance == null)
-            {
-                lock (locker)
-                {
-                    if (instance == null)
-                    {
-                        instance = new Bullet(bulletSpeed, myPlayer, form, true);
-                    }
-                }
-            }
-            return instance;
-        }
         public void setDirection(Direction direction)
         {
-            _viewDirection = direction;
+            this._viewDirection = direction;
         }
 
         public Direction getDirection()
         {
-            return _viewDirection;
+            return this._viewDirection;
         }
         public void spawnBullet(Tuple<int, int> coordinates, Player myPlayer)
         {
-            _bullet.Top = myPlayer.x + coordinates.Item1;
-            _bullet.Left = myPlayer.y + coordinates.Item2;
+            this._bullet.Top = myPlayer.x + coordinates.Item1;
+            this._bullet.Left = myPlayer.y + coordinates.Item2;
         }
 
         public Tuple<int, int> setSpawnCoordinates(Player myPlayer)
@@ -81,16 +67,16 @@ namespace Berzerk.model
             switch (getDirection())
             {
                 case Direction.Up:
-                    return new Tuple<int, int>(0, -10);
+                    return new Tuple<int, int>(0, -5);
                     break;
                 case Direction.Down:
-                    return new Tuple<int, int>(0, 10);
+                    return new Tuple<int, int>(0, 5);
                     break;
                 case Direction.Left:
-                    return new Tuple<int, int>(-10, 0);
+                    return new Tuple<int, int>(-5, 0);
                     break;
                 case Direction.Right:
-                    return new Tuple<int, int>(0, -10);
+                    return new Tuple<int, int>(5, 0);
                     break;
                 default:
                     return new Tuple<int, int>(0, 0);
