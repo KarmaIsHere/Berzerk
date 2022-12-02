@@ -83,11 +83,7 @@ namespace Berzerk.model
                 moveBullet();           
             if (x > 1192 || x < 0 || y < 0 || y > 617)
             {
-                bulletTimer.Stop();
-                bulletTimer.Dispose();
-                _bullet.Dispose();
-                bulletTimer = null;
-                _bullet = null;
+                destroyBullet();
             }
         }
 
@@ -111,6 +107,15 @@ namespace Berzerk.model
                     moveCoordinates(0, 0);
                     break;
             }
+        }
+
+        public void destroyBullet()
+        {
+            bulletTimer.Stop();
+            bulletTimer.Dispose();
+            _bullet.Dispose();
+            bulletTimer = null;
+            _bullet = null;
         }
         private void moveCoordinates(int x, int y)
         {

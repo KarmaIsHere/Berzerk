@@ -18,8 +18,8 @@ namespace Berzerk.helpers
         {
             this.height = height;
             this.width = width;
-            centerX = height / 2;
-            centerY = width / 2;
+            centerX = width / 2;
+            centerY = height / 2;
         }
     }
 }

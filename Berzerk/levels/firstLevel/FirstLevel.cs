@@ -15,11 +15,13 @@ namespace Berzerk
         List<Enemy> enemies = new List<Enemy>();
         int enemyIndexSave;
         int enemyIndex;
+        bool isGameOver;
+        TextBox textBoxClass;
 
         public FirstLevel()
         {
             InitializeComponent();
-            gameRestart();
+            gameRestart(false);
         }
 
         private void gameTimerEvent(object sender, EventArgs e)
@@ -52,7 +54,7 @@ namespace Berzerk
             {
                 if (thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(myPlayer.getBounds()))
                 {
-                    gameOver();
+                    gameOver(false);
                 }
             }
             foreach (Bullet thisBullet in bullets)
@@ -64,6 +66,7 @@ namespace Berzerk
                     {
                         flagCheck.enemyShot = true;
                         thisEnemy.die();
+                        thisBullet.destroyBullet();
                     }
                     
                 }
@@ -90,10 +93,32 @@ namespace Berzerk
                 enemyIndexSave = 0;
                 enemyIndex = 0;
             }
-            
+
+            if (enemies.Count == 0) gameOver(true);
         }
-        public void gameRestart()
+        public void gameRestart(bool isRestart)
         {
+            if (isRestart)
+            {
+                foreach (Enemy thisEnemy in enemies)
+                {
+                    if (thisEnemy.isEnemyBoxNull() == false) thisEnemy.die();
+                }
+                enemies.Clear();
+
+                foreach (Bullet thisBullet in bullets)
+                {
+                    if (thisBullet.isBulletBoxNull() == false) thisBullet.destroyBullet();
+                }
+                bullets.Clear();
+
+                myPlayer.die();
+                myPlayer = null;
+                textBoxClass.destroyTextBox();
+                textBoxClass = null;
+
+            }
+            
             scene = new SceneInfo(this.Height, this.Width);
 
             myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
@@ -107,6 +132,8 @@ namespace Berzerk
             enemy = new Enemy(this, 700, 500);
             enemies.Add(enemy);
 
+            textBoxClass = new TextBox(this);
+
             flagCheck = new FlagCheck();
             enemyIndexSave = 0;
             enemyIndex = 0;
@@ -114,10 +141,15 @@ namespace Berzerk
         gameTimer.Start();
         }
 
-        public void gameOver()
+        public void gameOver(bool isWinner)
         {
             gameTimer.Stop();
-            TextBox.popUpMessageCenter("Game Over", this, scene.centerX, scene.centerY);
+            isGameOver = true;
+            if (isWinner) 
+                textBoxClass.popUpVictory(this, scene.centerX, scene.centerY);
+            else 
+                textBoxClass.popUpGameOver(this, scene.centerX, scene.centerY);
+
         }
         private void keyIsDown(object sender, KeyEventArgs e)
         {
@@ -144,6 +176,11 @@ namespace Berzerk
             if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
             {
                 myPlayer.shooting = true;
+            }
+            if (e.KeyCode == Keys.Enter && isGameOver)
+            {
+                isGameOver = false;
+                gameRestart(true);
             }
         }
         private void keyIsUp(object sender, KeyEventArgs e)

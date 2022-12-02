@@ -60,10 +60,8 @@ namespace Berzerk.model
             this._player.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._player.Name = "playerCharacter";
             this._player.Tag = "player";
-            this._player.Size = new System.Drawing.Size(18, 53);
+            //this._player.Size = new System.Drawing.Size(18, 53);
             this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this._player.TabIndex = 0;
-            this._player.TabStop = false;
 
             this.x = x;
             this.y = y;
@@ -110,6 +108,11 @@ namespace Berzerk.model
         public Rectangle getBounds()
         {
             return _player.Bounds;
+        }
+        public void die()
+        {
+            _player.Dispose();
+            _player = null;
         }
     }
 }
