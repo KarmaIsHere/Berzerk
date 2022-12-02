@@ -67,20 +67,15 @@ namespace Berzerk.model
                     break;
             }
 
-            //_bullet.Left = myPlayer.x + coordinates.Item1;
-            //_bullet.Top = myPlayer.y + coordinates.Item2;
-
-
             form.Controls.Add(this._bullet);
             bulletTimer = new System.Windows.Forms.Timer();
             bulletTimer.Interval = _bulletSpeed;
             bulletTimer.Tick += new EventHandler(bulletMoveTick);
             bulletTimer.Start();
-            
         }
         public void bulletMoveTick(object sender, EventArgs e)
         {
-                moveBullet();           
+            moveBullet();           
             if (x > 1192 || x < 0 || y < 0 || y > 617)
             {
                 destroyBullet();

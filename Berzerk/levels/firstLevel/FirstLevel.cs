@@ -79,7 +79,6 @@ namespace Berzerk
             
             if (flagCheck.enemyShot)
             {
-                
                 foreach (Enemy thisEnemy in enemies)
                 {
                     

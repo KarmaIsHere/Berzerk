@@ -8,7 +8,6 @@ namespace Berzerk.helpers
 {
     internal class FlagCheck
     {
-        public bool bulletOutsideWindow;
         public bool enemyShot;
     }
 }
