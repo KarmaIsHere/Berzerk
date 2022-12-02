@@ -1,5 +1,7 @@
+using Berzerk.game_states;
 using Berzerk.helpers;
 using Berzerk.model;
+using Berzerk.utility;
 using TextBox = Berzerk.model.TextBox;
 
 namespace Berzerk
@@ -59,7 +61,6 @@ namespace Berzerk
             }
             foreach (Bullet thisBullet in bullets)
             {
-                
                 foreach (Enemy thisEnemy in enemies)
                 {
                     if (thisBullet.isBulletBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
@@ -100,37 +101,16 @@ namespace Berzerk
         {
             if (isRestart)
             {
-                foreach (Enemy thisEnemy in enemies)
-                {
-                    if (thisEnemy.isEnemyBoxNull() == false) thisEnemy.die();
-                }
-                enemies.Clear();
-
-                foreach (Bullet thisBullet in bullets)
-                {
-                    if (thisBullet.isBulletBoxNull() == false) thisBullet.destroyBullet();
-                }
-                bullets.Clear();
-
-                myPlayer.die();
-                myPlayer = null;
-                textBoxClass.destroyTextBox();
-                textBoxClass = null;
-
+                restartGame.restart(ref enemies, ref bullets, ref myPlayer, ref textBoxClass);
             }
             
             scene = new SceneInfo(this.Height, this.Width);
 
-            myPlayer = new Player(false, false, false, false, false, false, Player.Direction.Left, 100, 100, 2, this);
+            myPlayer = new Player(Player.Direction.Left, 100, 100, 2, this);
 
             bullet = new Bullet(12);
 
-            enemy = new Enemy(this, 300, 300);
-            enemies.Add(enemy);
-            enemy = new Enemy(this, 500, 300);
-            enemies.Add(enemy);
-            enemy = new Enemy(this, 700, 500);
-            enemies.Add(enemy);
+            entitySpawner.spawnEnemies(this, ref enemy, ref enemies);
 
             textBoxClass = new TextBox(this);
 

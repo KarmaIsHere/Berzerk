@@ -39,14 +39,14 @@ namespace Berzerk.model
         public int ammo { get => _ammo; set => _ammo = value; } 
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
-        public Player(bool goUp, bool goDown, bool goLeft, bool goRight, bool shooting, bool moving, Direction viewDirection, int x, int y, int playerSpeed, Form form)
+        public Player(Direction viewDirection, int x, int y, int playerSpeed, Form form)
         {
-            _goUp = goUp;
-            _goDown = goDown;
-            _goLeft = goLeft;
-            _goRight = goRight;
-            _shooting = shooting;
-            _moving = moving;
+            _goUp = false;
+            _goDown = false;
+            _goLeft = false;
+            _goRight = false;
+            _shooting = false;
+            _moving = false;
             _viewDirection = viewDirection;
             _playerSpeed = playerSpeed;
             _ammo = 1;
