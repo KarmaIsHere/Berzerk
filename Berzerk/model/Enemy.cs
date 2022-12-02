@@ -11,6 +11,8 @@ namespace Berzerk.model
     public class Enemy : Form
     {
         private PictureBox _enemy;
+        public int x { get => _enemy.Top; set => _enemy.Top = value; }
+        public int y { get => _enemy.Left; set => _enemy.Left = value; }
 
         public Enemy(Form form, int x, int y)
         {
@@ -26,6 +28,27 @@ namespace Berzerk.model
             this._enemy.TabStop = false;
             this._enemy.Tag = "enemy";
             form.Controls.Add(this._enemy);
+        }
+
+        public void removeEnemyBox(Form form)
+        {
+            form.Controls.Remove(_enemy);
+            _enemy.Dispose();
+        }
+
+        public Rectangle getBounds()
+        {
+            return _enemy.Bounds;
+        }
+        public void die()
+        {
+            _enemy.Dispose();
+            _enemy = null;
+        }
+        public bool isEnemyBoxNull()
+        {
+            if (_enemy == null) return true;
+            return false;
         }
     }
 }

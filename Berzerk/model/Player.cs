@@ -23,12 +23,8 @@ namespace Berzerk.model
         private Direction _viewDirection;
         private int _playerSpeed;
         private PictureBox _player;
-        private int _width;
-        private int _height;
         private int _ammo;
         private int _maxAmmoSize;
-        private int _x;
-        private int _y;
 
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }
@@ -36,10 +32,10 @@ namespace Berzerk.model
         public bool goRight { get => _goRight; set => _goRight = value; }
         public bool shooting { get => _shooting; set => _shooting = value; }
         public bool moving { get => _moving; set => _moving = value; }  
-        public int x { get => _player.Top; set => _player.Top = value; }
-        public int y { get => _player.Left; set => _player.Left = value; }
-        public int width { get => _width; set => _width = value;}
-        public int height { get => _height; set => _height = value;}
+        public int x { get => _player.Left; private set => _player.Left = value; }
+        public int y { get => _player.Top; private set => _player.Top = value; }
+        public int width { get => _player.Width; set => _player.Width = value;}
+        public int height { get => _player.Height; set => _player.Height = value;}
         public int ammo { get => _ammo; set => _ammo = value; } 
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
@@ -71,57 +67,49 @@ namespace Berzerk.model
 
             this.x = x;
             this.y = y;
-            this._width = this._player.Width;
-            this._height = this._player.Height;
 
             form.Controls.Add(this._player);
         }
-
         public void setDirection(Direction direction)
         {
             _viewDirection = direction;
         }
-
         public Direction getDirection()
         {
             return _viewDirection;
         }
-
         public void moveUp()
         {
             
             _player.Top -= _playerSpeed;
             setDirection(Player.Direction.Up);
         }
-
         public void moveDown()
         {
             _player.Top += _playerSpeed;
             setDirection(Player.Direction.Down);
         }
-
         public void moveLeft()
         {
             _player.Left -= _playerSpeed;
             setDirection(Player.Direction.Left);
         }
-
         public void moveRight()
         {
             _player.Left += _playerSpeed;
             setDirection(Player.Direction.Right);
         }
-
         public void shoot()
         {
             _ammo -= 1;
         }
-
         public void reload()
         {
             _ammo = maxAmmoSize;
         }
-
-
+        public Rectangle getBounds()
+        {
+            return _player.Bounds;
+        }
     }
 }
