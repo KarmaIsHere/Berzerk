@@ -1,18 +1,23 @@
 using Berzerk.game_states;
 using Berzerk.helpers;
-using Berzerk.model;
+using Berzerk.game_objects;
 using Berzerk.utility;
-using TextBox = Berzerk.model.TextBox;
+using TextBox = Berzerk.game_objects.TextBox;
+using Berzerk.services;
 
 namespace Berzerk
 {
     public partial class FirstLevel : Form
     {
         Player myPlayer;
-        Bullet? bullet;
-        Enemy? enemy;
+        PlayerControlls playerControlls = new PlayerControlls();
         SceneInfo scene;
+        EnemyManager enemyManager = new EnemyManager();
+
+        Enemy? enemy;
+        
         FlagCheck flagCheck;
+
         List<Bullet> bullets = new List<Bullet>();
         List<Enemy> enemies = new List<Enemy>();
         int enemyIndexSave;
@@ -28,33 +33,12 @@ namespace Berzerk
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
-            if (myPlayer.goUp && myPlayer.y > 0)
+            playerControlls.checkPlayerInput(ref myPlayer, ref scene);
+
+
+            foreach (Enemy enemy in enemyManager.getEnemies())
             {
-                myPlayer.moveUp();
-            }
-            if (myPlayer.goDown && myPlayer.y < scene.height)
-            {
-                myPlayer.moveDown();
-            }
-            if (myPlayer.goLeft && myPlayer.x > 0)
-            {
-                myPlayer.moveLeft();
-            }
-            if (myPlayer.goRight && myPlayer.x < scene.width)
-            {
-                myPlayer.moveRight();
-            }
-            if (myPlayer.shooting && myPlayer.ammo > 0)
-            {
-                myPlayer.shoot();
-                
-                bullet.spawnBullet(myPlayer, this, myPlayer.getDirection());
-                bullets.Add(bullet);
-                myPlayer.shooting = false;
-            }
-            foreach (Enemy thisEnemy in enemies)
-            {
-                if (thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(myPlayer.getBounds()))
+                if (enemy.isEnemyBoxNull() == false && enemy.getBounds().IntersectsWith(myPlayer.getBounds()))
                 {
                     gameOver(false);
                 }
@@ -69,7 +53,6 @@ namespace Berzerk
                         thisEnemy.die();
                         thisBullet.destroyBullet();
                     }
-                    
                 }
                 if (thisBullet.isBulletBoxNull())
                 {

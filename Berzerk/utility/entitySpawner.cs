@@ -1,4 +1,4 @@
-﻿using Berzerk.model;
+﻿using Berzerk.game_objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

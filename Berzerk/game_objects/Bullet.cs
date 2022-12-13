@@ -7,11 +7,11 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Berzerk.model.Bullet;
-using static Berzerk.model.Player;
+using static Berzerk.game_objects.Bullet;
+using static Berzerk.game_objects.Player;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace Berzerk.model
+namespace Berzerk.game_objects
 {
     public class Bullet
     {

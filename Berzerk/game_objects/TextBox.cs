@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Berzerk.model
+namespace Berzerk.game_objects
 {
     public class TextBox
     {

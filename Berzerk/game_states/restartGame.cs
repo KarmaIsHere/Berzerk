@@ -1,4 +1,4 @@
-﻿using Berzerk.model;
+﻿using Berzerk.game_objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Berzerk.game_states
 {
     public class restartGame
     {
-        public static void restart(ref List<Enemy> enemies, ref List<Bullet> bullets, ref Player myPlayer, ref Berzerk.model.TextBox textBoxClass)
+        public static void restart(ref List<Enemy> enemies, ref List<Bullet> bullets, ref Player myPlayer, ref Berzerk.game_objects.TextBox textBoxClass)
         {
             foreach (Enemy thisEnemy in enemies)
             {

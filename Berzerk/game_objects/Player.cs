@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Berzerk.model
+namespace Berzerk.game_objects
 {
     public class Player : Form
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Berzerk.helpers
 {
-    internal class SceneInfo
+    public class SceneInfo
     {
         public int height { get; private set; }
         public int width { get; private set; }
