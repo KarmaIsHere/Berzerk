@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Berzerk.helpers
 {
-    internal class FlagCheck
+    public class FlagCheck
     {
         public bool enemyShot;
     }

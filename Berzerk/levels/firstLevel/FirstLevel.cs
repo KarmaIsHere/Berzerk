@@ -4,6 +4,7 @@ using Berzerk.game_objects;
 using Berzerk.utility;
 using TextBox = Berzerk.game_objects.TextBox;
 using Berzerk.services;
+using Berzerk.services.collision;
 
 namespace Berzerk
 {
@@ -13,13 +14,16 @@ namespace Berzerk
         PlayerControlls playerControlls = new PlayerControlls();
         SceneInfo scene;
         EnemyManager enemyManager = new EnemyManager();
+        KeyBoardInput keyBoardInput = new KeyBoardInput();
+        PlayerCollision playerCollision = new PlayerCollision();
+        EnemyCollision enemyCollision = new EnemyCollision();
+        GameProperties gameProperties = new GameProperties();
 
         Enemy? enemy;
         
         FlagCheck flagCheck;
-
+        Bullet bullet;
         List<Bullet> bullets = new List<Bullet>();
-        List<Enemy> enemies = new List<Enemy>();
         int enemyIndexSave;
         int enemyIndex;
         bool isGameOver;
@@ -35,17 +39,12 @@ namespace Berzerk
         {
             playerControlls.checkPlayerInput(ref myPlayer, ref scene);
 
+            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref gameProperties);
 
-            foreach (Enemy enemy in enemyManager.getEnemies())
-            {
-                if (enemy.isEnemyBoxNull() == false && enemy.getBounds().IntersectsWith(myPlayer.getBounds()))
-                {
-                    gameOver(false);
-                }
-            }
+            //this is next
             foreach (Bullet thisBullet in bullets)
             {
-                foreach (Enemy thisEnemy in enemies)
+                foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
                     if (thisBullet.isBulletBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
                     {
@@ -62,7 +61,7 @@ namespace Berzerk
             
             if (flagCheck.enemyShot)
             {
-                foreach (Enemy thisEnemy in enemies)
+                foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
                     
                     if (thisEnemy.isEnemyBoxNull())
@@ -72,17 +71,19 @@ namespace Berzerk
                     }
                     enemyIndex++;
                 }
-                enemies.RemoveAt(enemyIndexSave);
+                enemyManager.getEnemies().RemoveAt(enemyIndexSave);
                 enemyIndexSave = 0;
                 enemyIndex = 0;
             }
 
-            if (enemies.Count == 0) gameOver(true);
+            if (enemyManager.getEnemies().Count == 0) gameOver(true);
         }
         public void gameRestart(bool isRestart)
         {
+            List<Enemy> enemies;
             if (isRestart)
             {
+                enemies = enemyManager.getEnemies();
                 restartGame.restart(ref enemies, ref bullets, ref myPlayer, ref textBoxClass);
             }
             
@@ -92,7 +93,7 @@ namespace Berzerk
 
             bullet = new Bullet(12);
 
-            entitySpawner.spawnEnemies(this, ref enemy, ref enemies);
+            enemyManager.spawnEnemy(this, 300, 300);
 
             textBoxClass = new TextBox(this);
 
@@ -115,30 +116,8 @@ namespace Berzerk
         }
         private void keyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up && myPlayer.moving == false)
-            {
-                myPlayer.goUp = true;
-                myPlayer.moving = true;
-            }
-            if (e.KeyCode == Keys.Down && myPlayer.moving == false)
-            {
-                myPlayer.goDown = true;
-                myPlayer.moving = true;
-            }
-            if (e.KeyCode == Keys.Left && myPlayer.moving == false)
-            {
-                myPlayer.goLeft = true;
-                myPlayer.moving = true;
-            }
-            if (e.KeyCode == Keys.Right && myPlayer.moving == false)
-            {
-                myPlayer.goRight = true;
-                myPlayer.moving = true;
-            }
-            if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
-            {
-                myPlayer.shooting = true;
-            }
+            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+
             if (e.KeyCode == Keys.Enter && isGameOver)
             {
                 isGameOver = false;
@@ -147,30 +126,7 @@ namespace Berzerk
         }
         private void keyIsUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
-            {
-                myPlayer.goUp = false;
-                myPlayer.moving = false;
-            }
-            if (e.KeyCode == Keys.Down)
-            {
-                myPlayer.goDown = false;
-                myPlayer.moving = false;
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                myPlayer.goLeft = false;
-                myPlayer.moving = false;
-            }
-            if (e.KeyCode == Keys.Right)
-            {
-                myPlayer.goRight = false;
-                myPlayer.moving = false;
-            }
-            if (e.KeyCode == Keys.Space)
-            {
-                myPlayer.shooting = false;
-            }
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
         }
     }
 }

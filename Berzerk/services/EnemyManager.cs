@@ -16,7 +16,7 @@ namespace Berzerk.services
             return enemies;
         }
 
-        public void spawnEnemies(Form form, int x, int y)
+        public void spawnEnemy(Form form, int x, int y)
         {
             Enemy enemy = new Enemy(form, x, y);
             enemies.Add(enemy);

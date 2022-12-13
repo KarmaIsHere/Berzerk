@@ -26,6 +26,8 @@ namespace Berzerk.game_objects
         private int _ammo;
         private int _maxAmmoSize;
 
+        List<Bullet> shotBullets = new List<Bullet>();
+
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }
         public bool goLeft { get => _goLeft; set => _goLeft = value; }
@@ -113,6 +115,11 @@ namespace Berzerk.game_objects
         {
             _player.Dispose();
             _player = null;
+        }
+
+        public List<Bullet> getShotBullets()
+        {
+            return shotBullets;
         }
     }
 }
