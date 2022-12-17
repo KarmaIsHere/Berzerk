@@ -6,33 +6,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Berzerk.services
+namespace Berzerk.services.controller
 {
     public class PlayerControlls
     {
+        Form form;
+
+        public PlayerControlls(Form form)
+        {
+            this.form = form;
+        }
+
         public void checkPlayerInput(ref Player myPlayer, ref SceneInfo scene)
         {
             if (myPlayer.goUp && myPlayer.y > 0)
             {
-                myPlayer.moveUp();
+                myPlayer.move(Entity.Direction.Up);
             }
-            if (myPlayer.goDown && myPlayer.y < scene.height)
+            if (myPlayer.goDown && myPlayer.y < scene.height - 100)
             {
-                myPlayer.moveDown();
+                myPlayer.move(Entity.Direction.Down);
             }
             if (myPlayer.goLeft && myPlayer.x > 0)
             {
-                myPlayer.moveLeft();
+                myPlayer.move(Entity.Direction.Left);
             }
-            if (myPlayer.goRight && myPlayer.x < scene.width)
+            if (myPlayer.goRight && myPlayer.x < scene.width - 50)
             {
-                myPlayer.moveRight();
+                myPlayer.move(Entity.Direction.Right);
+            }
+            if(myPlayer.getShotBullets().Count < 1)
+            {
+                myPlayer.reload();
             }
             if (myPlayer.shooting && myPlayer.ammo > 0)
             {
-                myPlayer.shoot();
-                bullet.spawnBullet(myPlayer, this, myPlayer.getDirection());
-                bullets.Add(bullet);
+                myPlayer.shoot(form);
                 myPlayer.shooting = false;
             }
         }

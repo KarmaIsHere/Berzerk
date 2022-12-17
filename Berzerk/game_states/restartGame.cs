@@ -9,7 +9,7 @@ namespace Berzerk.game_states
 {
     public class restartGame
     {
-        public static void restart(ref List<Enemy> enemies, ref List<Bullet> bullets, ref Player myPlayer, ref Berzerk.game_objects.TextBox textBoxClass)
+        public static void restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver)
         {
             foreach (Enemy thisEnemy in enemies)
             {
@@ -17,16 +17,18 @@ namespace Berzerk.game_states
             }
             enemies.Clear();
 
-            foreach (Bullet thisBullet in bullets)
+            foreach (Bullet thisBullet in myPlayer.getShotBullets())
             {
-                if (thisBullet.isBulletBoxNull() == false) thisBullet.destroyBullet();
+                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroyBullet();
             }
-            bullets.Clear();
+            myPlayer.clearBullets();
 
-            myPlayer.die();
+            myPlayer.destroy();
             myPlayer = null;
-            textBoxClass.destroyTextBox();
-            textBoxClass = null;
+
+            gameOver.destroyTextBox();
+            gameOver = null;
+            
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Berzerk
 {
-    partial class FirstLevel
+    partial class LevelTemplate
     {
         /// <summary>
         ///  Required designer variable.
@@ -37,13 +37,13 @@
             this.gameTimer.Interval = 1;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimerEvent);
             // 
-            // FirstLevel
+            // LevelTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1176, 578);
-            this.Name = "FirstLevel";
+            this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Name = "LevelTemplate";
             this.Text = "Berzerk";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);

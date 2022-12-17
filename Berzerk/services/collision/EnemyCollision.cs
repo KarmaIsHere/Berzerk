@@ -16,14 +16,14 @@ namespace Berzerk.services.collision
             {
                 foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
-                    if (thisBullet.isBulletBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
+                    if (thisBullet.isPictureBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
                     {
                         flagCheck.enemyShot = true;
                         thisEnemy.die();
                         thisBullet.destroyBullet();
                     }
                 }
-                if (thisBullet.isBulletBoxNull())
+                if (thisBullet.isPictureBoxNull())
                 {
                     myPlayer.reload();
                 }

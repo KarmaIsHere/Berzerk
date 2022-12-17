@@ -15,7 +15,8 @@ namespace Berzerk.services.collision
             {
                 if (enemy.isEnemyBoxNull() == false && enemy.getBounds().IntersectsWith(myPlayer.getBounds()))
                 {
-                    game.IsOver = true;
+                    game.isOver = true;
+                    game.isVicotry = false;
                 }
             }
         }

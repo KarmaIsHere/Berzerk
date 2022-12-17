@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Berzerk.game_objects
 {
-    public class Player : Form
+    public class Player : Entity
     {
-        public enum Direction { Up, Down, Left, Right };
+        //public enum Direction { Up, Down, Left, Right };
 
         private bool _goUp;
         private bool _goDown;
@@ -20,11 +20,14 @@ namespace Berzerk.game_objects
         private bool _shooting;
         private bool _moving;
 
-        private Direction _viewDirection;
+        protected Direction _viewDirection;
         private int _playerSpeed;
         private PictureBox _player;
         private int _ammo;
         private int _maxAmmoSize;
+
+        private int xSpeedTick;
+        private int ySpeedTick;
 
         List<Bullet> shotBullets = new List<Bullet>();
 
@@ -41,7 +44,7 @@ namespace Berzerk.game_objects
         public int ammo { get => _ammo; set => _ammo = value; } 
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
-        public Player(Direction viewDirection, int x, int y, int playerSpeed, Form form)
+        public Player(Direction viewDirection, int x, int y, Form form)
         {
             _goUp = false;
             _goDown = false;
@@ -50,7 +53,7 @@ namespace Berzerk.game_objects
             _shooting = false;
             _moving = false;
             _viewDirection = viewDirection;
-            _playerSpeed = playerSpeed;
+            _playerSpeed = 2;
             _ammo = 1;
             _maxAmmoSize = 1;
 
@@ -59,10 +62,8 @@ namespace Berzerk.game_objects
 
             this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");   
             this._player.Location = new System.Drawing.Point(x, y);
-            this._player.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._player.Name = "playerCharacter";
             this._player.Tag = "player";
-            //this._player.Size = new System.Drawing.Size(18, 53);
             this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 
             this.x = x;
@@ -78,48 +79,65 @@ namespace Berzerk.game_objects
         {
             return _viewDirection;
         }
-        public void moveUp()
+        public override void move(Direction direction)
         {
-            
-            _player.Top -= _playerSpeed;
-            setDirection(Player.Direction.Up);
+            setDirection(direction);
+            xSpeedTick = 0;
+            ySpeedTick = 0;
+            switch (direction)
+            {
+                case Direction.Left:
+                    xSpeedTick = -_playerSpeed;
+                    break;
+                case Direction.Right:
+                    xSpeedTick = _playerSpeed;
+                    break;
+                case Direction.Up:
+                    ySpeedTick = -_playerSpeed;
+                    break;
+                case Direction.Down:
+                    ySpeedTick = _playerSpeed;
+                    break;
+            }
+            this.x += xSpeedTick;
+            this.y += ySpeedTick;
         }
-        public void moveDown()
-        {
-            _player.Top += _playerSpeed;
-            setDirection(Player.Direction.Down);
-        }
-        public void moveLeft()
-        {
-            _player.Left -= _playerSpeed;
-            setDirection(Player.Direction.Left);
-        }
-        public void moveRight()
-        {
-            _player.Left += _playerSpeed;
-            setDirection(Player.Direction.Right);
-        }
-        public void shoot()
+        public void shoot(Form form)
         {
             _ammo -= 1;
+            shotBullets.Add(new Bullet(12));
+            shotBullets.Last().spawn(this, form);
         }
         public void reload()
         {
             _ammo = maxAmmoSize;
         }
-        public Rectangle getBounds()
+        public List<Bullet> getShotBullets()
+        {
+            return shotBullets;
+        }
+        public void removeBullet(int index)
+        {
+            shotBullets.RemoveAt(index);
+        }
+
+        public void clearBullets()
+        {
+            shotBullets.Clear();
+        }
+        public override Rectangle getBounds()
         {
             return _player.Bounds;
         }
-        public void die()
+        public override void destroy()
         {
             _player.Dispose();
             _player = null;
         }
-
-        public List<Bullet> getShotBullets()
+        public override bool isPictureBoxNull()
         {
-            return shotBullets;
+            if (_player == null) return true;
+            return false;
         }
     }
 }

@@ -13,8 +13,10 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Berzerk.game_objects
 {
-    public class Bullet
+    public class Bullet : Entity
     {
+        //public enum Direction { Up, Down, Left, Right };
+
         protected int _bulletSpeed;
         protected PictureBox _bullet;
         protected Direction _viewDirection;
@@ -22,52 +24,64 @@ namespace Berzerk.game_objects
         public int x { get => _bullet.Left; private set => _bullet.Left = value; }
         public int y { get => _bullet.Top; private set => _bullet.Top = value; }
 
+        private int xSpeedTick = 0;
+        private int ySpeedTick = 0;
 
         public Bullet(int bulletSpeed)
         {
             this._bulletSpeed = bulletSpeed;
         }
-
-        public void setDirection(Direction direction)
+        public void spawn(Player myPlayer, Form form)
         {
-            this._viewDirection = direction;
-        }
-
-        public Direction getDirection()
-        {
-            return this._viewDirection;
-        }
-        public void spawnBullet(Player myPlayer, Form form, Direction direction)
-        {
-            _bullet = new System.Windows.Forms.PictureBox();
-            _bullet.BackColor = System.Drawing.Color.Yellow;
+            _bullet = new PictureBox();
+            _bullet.BackColor = Color.Yellow;
             _bullet.Tag = "bulletEntity";
-            setDirection(direction);
+            setDirection(myPlayer.getDirection());
 
-            if (_viewDirection == Direction.Up || _viewDirection == Direction.Down) makeBulletVertical();
-            else _bullet.Size = new System.Drawing.Size(20, 5);
+            if (_viewDirection == Direction.Up || _viewDirection == Direction.Down) makeVertical();
+            else _bullet.Size = new Size(20, 5);
 
             switch (_viewDirection)
             {
                 case Direction.Up:
                     y = -30 + myPlayer.y;
                     x = myPlayer.width / 2 + myPlayer.x;
+                    ySpeedTick = -_bulletSpeed;
                     break;
                 case Direction.Down:
                     y = 60 + myPlayer.y;
-                    x = myPlayer.width / 2 + myPlayer.x; ;
+                    x = myPlayer.width / 2 + myPlayer.x;
+                    ySpeedTick = _bulletSpeed;
                     break;
                 case Direction.Left:
-                    y = myPlayer.height / 2 + myPlayer.y; ;
+                    y = myPlayer.height / 2 + myPlayer.y;
                     x = -30 + myPlayer.x;
+                    xSpeedTick = -_bulletSpeed; 
                     break;
                 case Direction.Right:
-                    y = myPlayer.height / 2 + myPlayer.y; ;
+                    y = myPlayer.height / 2 + myPlayer.y; 
                     x = 30 + myPlayer.x;
+                    xSpeedTick = _bulletSpeed; 
                     break;
             }
-
             form.Controls.Add(this._bullet);
+
+            createBulletTimer();
+        }
+        public void makeVertical()
+        {
+            this._bullet.Size = new System.Drawing.Size(5, 20);
+        }
+        public void setDirection(Direction direction)
+        {
+            this._viewDirection = direction;
+        }
+        public Direction getDirection()
+        {
+            return this._viewDirection;
+        }
+        private void createBulletTimer()
+        {
             bulletTimer = new System.Windows.Forms.Timer();
             bulletTimer.Interval = _bulletSpeed;
             bulletTimer.Tick += new EventHandler(bulletMoveTick);
@@ -75,36 +89,18 @@ namespace Berzerk.game_objects
         }
         public void bulletMoveTick(object sender, EventArgs e)
         {
-            moveBullet();           
+            move(_viewDirection);           
             if (x > 1192 || x < 0 || y < 0 || y > 617)
             {
-                destroyBullet();
+                destroy();
             }
         }
-
-        public void moveBullet()
+        public override void move(Direction direction)
         {
-            switch (getDirection())
-            {
-                case Direction.Up:
-                    moveCoordinates(0, -_bulletSpeed);
-                    break;
-                case Direction.Down:
-                    moveCoordinates(0, _bulletSpeed);
-                    break;
-                case Direction.Left:
-                    moveCoordinates(-_bulletSpeed, 0);
-                    break;
-                case Direction.Right:
-                    moveCoordinates(_bulletSpeed, 0);
-                    break;
-                default:
-                    moveCoordinates(0, 0);
-                    break;
-            }
+            this.x += xSpeedTick;
+            this.y += ySpeedTick;
         }
-
-        public void destroyBullet()
+        public override void destroy()
         {
             bulletTimer.Stop();
             bulletTimer.Dispose();
@@ -112,25 +108,16 @@ namespace Berzerk.game_objects
             bulletTimer = null;
             _bullet = null;
         }
-        private void moveCoordinates(int x, int y)
-        {
-            this.x += x;
-            this.y += y; 
-        }
-
-        public void makeBulletVertical()
-        {
-            this._bullet.Size = new System.Drawing.Size(5, 20);
-        }
-        public Rectangle getBounds()
+        public override Rectangle getBounds()
         {
             return _bullet.Bounds;
         }
-        public bool isBulletBoxNull()
+        public override bool isPictureBoxNull()
         {
             if (_bullet == null) return true;
             return false;
         }
+        
 
     }
 }
