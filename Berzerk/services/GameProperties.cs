@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Berzerk.services
 {
-    public  class GameProperties
+    public class GameProperties
     {
         private bool _isOver;
         private bool _isVictory;
@@ -22,6 +22,11 @@ namespace Berzerk.services
                 _isOver = true;
                 _isVictory = true;
             }
+        }
+
+        public static int strongEnemyWorth()
+        {
+            return 100;
         }
     }
 }

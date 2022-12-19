@@ -1,4 +1,5 @@
 ﻿using Berzerk.game_objects;
+using Berzerk.services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace Berzerk.game_states
 {
-    public class restartGame
+    public class RestartGame
     {
-        public static void restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver)
+        public static void restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver, ref ScoreManager scoreManager)
         {
             foreach (Enemy thisEnemy in enemies)
             {
-                if (thisEnemy.isEnemyBoxNull() == false) thisEnemy.die();
+                if (thisEnemy.isPictureBoxNull() == false) thisEnemy.destroy();
             }
             enemies.Clear();
 
             foreach (Bullet thisBullet in myPlayer.getShotBullets())
             {
-                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroyBullet();
+                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroy();
             }
             myPlayer.clearBullets();
 
@@ -28,6 +29,9 @@ namespace Berzerk.game_states
 
             gameOver.destroyTextBox();
             gameOver = null;
+
+            scoreManager.destroyTextBox();
+            scoreManager = null;
             
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Berzerk.Properties;
+using Berzerk.services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,11 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Berzerk.game_objects.Entity;
 
 namespace Berzerk.game_objects
 {
-    public class Player : Entity
+    public class Player : Entity, IObserver<int>
     {
         //public enum Direction { Up, Down, Left, Right };
 
@@ -30,18 +32,19 @@ namespace Berzerk.game_objects
         private int ySpeedTick;
 
         List<Bullet> shotBullets = new List<Bullet>();
+        List<IObserver<int>> watchers = new();
 
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }
         public bool goLeft { get => _goLeft; set => _goLeft = value; }
         public bool goRight { get => _goRight; set => _goRight = value; }
         public bool shooting { get => _shooting; set => _shooting = value; }
-        public bool moving { get => _moving; set => _moving = value; }  
+        public bool moving { get => _moving; set => _moving = value; }
         public int x { get => _player.Left; private set => _player.Left = value; }
         public int y { get => _player.Top; private set => _player.Top = value; }
-        public int width { get => _player.Width; set => _player.Width = value;}
-        public int height { get => _player.Height; set => _player.Height = value;}
-        public int ammo { get => _ammo; set => _ammo = value; } 
+        public int width { get => _player.Width; set => _player.Width = value; }
+        public int height { get => _player.Height; set => _player.Height = value; }
+        public int ammo { get => _ammo; set => _ammo = value; }
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
         public Player(Direction viewDirection, int x, int y, Form form)
@@ -57,14 +60,14 @@ namespace Berzerk.game_objects
             _ammo = 1;
             _maxAmmoSize = 1;
 
-            this._player = new System.Windows.Forms.PictureBox();
+            this._player = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
 
-            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");   
-            this._player.Location = new System.Drawing.Point(x, y);
+            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");
+            this._player.Location = new Point(x, y);
             this._player.Name = "playerCharacter";
             this._player.Tag = "player";
-            this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this._player.SizeMode = PictureBoxSizeMode.AutoSize;
 
             this.x = x;
             this.y = y;
@@ -99,6 +102,10 @@ namespace Berzerk.game_objects
                     ySpeedTick = _playerSpeed;
                     break;
             }
+            move();
+        }
+        public void move()
+        {
             this.x += xSpeedTick;
             this.y += ySpeedTick;
         }
@@ -110,8 +117,9 @@ namespace Berzerk.game_objects
         }
         public void reload()
         {
-            _ammo = maxAmmoSize;
+            if (_ammo < maxAmmoSize) _ammo = maxAmmoSize;
         }
+        public void addOneAmmo() => _ammo++;
         public List<Bullet> getShotBullets()
         {
             return shotBullets;
@@ -138,6 +146,22 @@ namespace Berzerk.game_objects
         {
             if (_player == null) return true;
             return false;
+        }
+
+        public void OnCompleted()
+        {
+            
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(int value)
+        {
+            reload();
+            if (value >= GameProperties.strongEnemyWorth()) addOneAmmo();
         }
     }
 }

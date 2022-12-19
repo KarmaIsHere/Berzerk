@@ -7,7 +7,7 @@ using Berzerk.services.controller;
 
 namespace Berzerk
 {
-    public partial class LevelTemplate : Form
+    public partial class LevelTemplate : Form, IObserver<bool>
     {
         private Player myPlayer;
         private PlayerControlls playerControlls;
@@ -20,6 +20,7 @@ namespace Berzerk
         private FlagCheck flagCheck;
         private BulletController bulletController;
         private GameOver gameOver;
+        private ScoreManager scoreManager;
 
         public LevelTemplate()
         {
@@ -41,7 +42,6 @@ namespace Berzerk
 
             bulletController.checkDestroyedBullets(ref myPlayer);
 
-            if (gameProperties.isOver) setGameOver(gameProperties.isVicotry);
         }
         public void gameRestart(bool isRestart)
         {
@@ -49,7 +49,7 @@ namespace Berzerk
             if (isRestart)
             {
                 enemies = enemyManager.getEnemies();
-                restartGame.restart(ref enemies, ref myPlayer, ref gameOver);
+                RestartGame.restart(ref enemies, ref myPlayer, ref gameOver, ref scoreManager);
             }
 
             enemyManager = new EnemyManager();
@@ -61,11 +61,17 @@ namespace Berzerk
             bulletController = new BulletController();
 
             scene = new SceneInfo(this.Height, this.Width);
+            scoreManager = new ScoreManager(this, 0,0);
 
             myPlayer = new Player(Player.Direction.Left, 100, 100, this);
+
             playerControlls = new PlayerControlls(this);
 
-            enemyManager.spawnEnemies(this,3, scene.height, scene.width);
+            enemyManager.spawnEnemies(this, 3, scene.height, scene.width);
+
+            enemyManager.Subscribe(myPlayer);
+            enemyManager.Subscribe(scoreManager);
+            playerCollision.Subscribe(this);
 
             flagCheck = new FlagCheck();
 
@@ -91,6 +97,21 @@ namespace Berzerk
         private void keyIsUp(object sender, KeyEventArgs e)
         {
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+        }
+
+        public void OnCompleted()
+        {
+            setGameOver(gameProperties.isVicotry);
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(bool value)
+        {
+            gameProperties.isVicotry = value;
         }
     }
 }

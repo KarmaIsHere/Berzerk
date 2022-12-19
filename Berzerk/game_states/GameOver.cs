@@ -39,8 +39,5 @@ namespace Berzerk.game_states
             if (label == null) return true;
             return false;
         }
-
-
-
     }
 }

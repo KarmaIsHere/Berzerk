@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace Berzerk.services
 {
-    public class EnemyManager
+    public class EnemyManager : IObservable<int>, IDisposable
     {
         private int _enemyCount = 0;
+        private int _enemiesSpawned = 0;
+        
+        List<IObserver<int>> scoreWatchers = new();
+        List<IObserver<bool>> enemyCountWatchers = new();
         public int enemyCount { get { return _enemyCount; } }
         List<Enemy> enemies = new List<Enemy>();
 
@@ -24,6 +28,7 @@ namespace Berzerk.services
             Enemy enemy = new Enemy(form, x, y);
             enemies.Add(enemy);
             _enemyCount++;
+            _enemiesSpawned++;
         }
 
         public void spawnEnemies(Form form, int count, int sceneHeight, int sceneWidth)
@@ -39,22 +44,42 @@ namespace Berzerk.services
         {
             int enemyIndexSave = 0;
             int enemyIndex = 0;
+            int gotScrore = 0;
             if (flagCheck.enemyShot)
             {
                 foreach (Enemy thisEnemy in enemies)
                 {
-                    if (thisEnemy.isEnemyBoxNull())
+                    if (thisEnemy.isPictureBoxNull())
                     {
                         flagCheck.enemyShot = false;
                         enemyIndexSave = enemyIndex;
                     }
                     enemyIndex++;
                 }
+                gotScrore = enemies.ElementAt(enemyIndexSave).scoreWorth;
                 enemies.RemoveAt(enemyIndexSave);
                 _enemyCount--;
                 enemyIndexSave = 0;
                 enemyIndex = 0;
+
+                Notify(gotScrore);
             }
+        }
+        public IDisposable Subscribe(IObserver<int> observer)
+        {
+            scoreWatchers.Add(observer);
+            return this;
+        }
+        public void Dispose() => throw new NotImplementedException();
+
+        public void Notify(int gotScore)
+        {
+            if (_enemyCount == 0)
+            {
+                scoreWatchers.ForEach(x => x.OnCompleted());
+                return;
+            }
+            scoreWatchers.ForEach(x => x.OnNext(gotScore));
         }
     }
 }

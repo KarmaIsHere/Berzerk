@@ -66,7 +66,7 @@ namespace Berzerk.game_objects
             }
             form.Controls.Add(this._bullet);
 
-            createBulletTimer();
+            createTimer();
         }
         public void makeVertical()
         {
@@ -80,7 +80,7 @@ namespace Berzerk.game_objects
         {
             return this._viewDirection;
         }
-        private void createBulletTimer()
+        private void createTimer()
         {
             bulletTimer = new System.Windows.Forms.Timer();
             bulletTimer.Interval = _bulletSpeed;

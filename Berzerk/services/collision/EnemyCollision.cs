@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Berzerk.services.collision
 {
-    public class EnemyCollision
+    public class EnemyCollision 
     {
         public void checkEnemyCollision(ref Player myPlayer, ref EnemyManager enemyManager, ref FlagCheck flagCheck)
         {
@@ -16,16 +16,12 @@ namespace Berzerk.services.collision
             {
                 foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
-                    if (thisBullet.isPictureBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
+                    if (thisBullet.isPictureBoxNull() == false && thisEnemy.isPictureBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
                     {
                         flagCheck.enemyShot = true;
-                        thisEnemy.die();
-                        thisBullet.destroyBullet();
+                        thisEnemy.destroy();
+                        thisBullet.destroy();
                     }
-                }
-                if (thisBullet.isPictureBoxNull())
-                {
-                    myPlayer.reload();
                 }
             }
         }
