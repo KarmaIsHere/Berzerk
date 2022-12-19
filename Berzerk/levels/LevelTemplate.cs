@@ -41,7 +41,6 @@ namespace Berzerk
             gameProperties.checkEnemyCount(enemyManager.enemyCount);
 
             bulletController.checkDestroyedBullets(ref myPlayer);
-
         }
         public void gameRestart(bool isRestart)
         {
@@ -53,12 +52,12 @@ namespace Berzerk
             }
 
             enemyManager = new EnemyManager();
-            keyBoardInput = new KeyBoardInput();
-            playerCollision = new PlayerCollision();
             enemyCollision = new EnemyCollision();
+            playerCollision = new PlayerCollision();
+            bulletController = new BulletController();
+            keyBoardInput = new KeyBoardInput();
             gameProperties = new GameProperties();
             flagCheck = new FlagCheck();
-            bulletController = new BulletController();
 
             scene = new SceneInfo(this.Height, this.Width);
             scoreManager = new ScoreManager(this, 0,0);
@@ -67,10 +66,11 @@ namespace Berzerk
 
             playerControlls = new PlayerControlls(this);
 
-            enemyManager.spawnEnemies(this, 3, scene.height, scene.width);
+            enemyManager.spawnEnemies(this, 6, scene.height, scene.width);
 
             enemyManager.Subscribe(myPlayer);
             enemyManager.Subscribe(scoreManager);
+            enemyManager.Subscribe(this);
             playerCollision.Subscribe(this);
 
             flagCheck = new FlagCheck();

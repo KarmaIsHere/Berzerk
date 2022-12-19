@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Berzerk.services
+namespace Berzerk.services.controller
 {
-    public class EnemyManager : IObservable<int>, IDisposable
+    public class EnemyManager : IObservable<int>, IObservable<bool>, IDisposable
     {
         private int _enemyCount = 0;
         private int _enemiesSpawned = 0;
-        
+
         List<IObserver<int>> scoreWatchers = new();
-        List<IObserver<bool>> enemyCountWatchers = new();
+        List<IObserver<bool>> victoryWatchers = new();
         public int enemyCount { get { return _enemyCount; } }
         List<Enemy> enemies = new List<Enemy>();
 
@@ -62,7 +62,9 @@ namespace Berzerk.services
                 enemyIndexSave = 0;
                 enemyIndex = 0;
 
-                Notify(gotScrore);
+                NotifyVictory();
+                NotifyScore(gotScrore);
+
             }
         }
         public IDisposable Subscribe(IObserver<int> observer)
@@ -70,16 +72,30 @@ namespace Berzerk.services
             scoreWatchers.Add(observer);
             return this;
         }
-        public void Dispose() => throw new NotImplementedException();
-
-        public void Notify(int gotScore)
+        public IDisposable Subscribe(IObserver<bool> observer)
         {
+            victoryWatchers.Add(observer);
+            return this;
+        }
+        public void NotifyScore(int gotScore)
+        {
+            scoreWatchers.ForEach(x => x.OnNext(gotScore));
             if (_enemyCount == 0)
             {
                 scoreWatchers.ForEach(x => x.OnCompleted());
                 return;
             }
-            scoreWatchers.ForEach(x => x.OnNext(gotScore));
+
         }
+        public void NotifyVictory()
+        {
+            if (_enemyCount == 0)
+            {
+                victoryWatchers.ForEach(x => x.OnNext(true));
+                victoryWatchers.ForEach(x => x.OnCompleted());
+            }
+
+        }
+        public void Dispose() => throw new NotImplementedException();
     }
 }
