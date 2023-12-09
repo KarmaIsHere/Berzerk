@@ -60,7 +60,7 @@ namespace Berzerk.game_objects
             this._player = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
 
-            this._player.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\player.png");   
+            this._player.Load(@"C:\Users\ACER\source\repos\Berzerk\Berzerk\Properties\images\player.png");   
             this._player.Location = new System.Drawing.Point(x, y);
             this._player.Name = "playerCharacter";
             this._player.Tag = "player";
