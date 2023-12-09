@@ -11,15 +11,13 @@ namespace Berzerk.game_objects
 {
     public class Player : Entity
     {
-        //public enum Direction { Up, Down, Left, Right };
-
+        
         private bool _goUp;
         private bool _goDown;
         private bool _goLeft;
         private bool _goRight;
         private bool _shooting;
         private bool _moving;
-
         protected Direction _viewDirection;
         private int _playerSpeed;
         private PictureBox _player;
@@ -44,7 +42,7 @@ namespace Berzerk.game_objects
         public int ammo { get => _ammo; set => _ammo = value; } 
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
-        public Player(Direction viewDirection, int x, int y, Form form)
+        public Player(Direction viewDirection, int x, int y, Form form, PlayerPictureBoxManager playerPictureBoxManager)
         {
             _goUp = false;
             _goDown = false;
@@ -56,29 +54,21 @@ namespace Berzerk.game_objects
             _playerSpeed = 2;
             _ammo = 1;
             _maxAmmoSize = 1;
-
-            this._player = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this._player)).BeginInit();
-
-            this._player.Load(@"C:\Users\Namai\source\repos\Berzerk\Berzerk\Properties\images\player.png");   
-            this._player.Location = new System.Drawing.Point(x, y);
-            this._player.Name = "playerCharacter";
-            this._player.Tag = "player";
-            this._player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-
-            this.x = x;
+            this._player = playerPictureBoxManager.createPlayerPictureBox(x,y);
             this.y = y;
-
+            this.x = x;
             form.Controls.Add(this._player);
         }
         public void setDirection(Direction direction)
         {
             _viewDirection = direction;
         }
+
         public Direction getDirection()
         {
             return _viewDirection;
         }
+
         public override void move(Direction direction)
         {
             setDirection(direction);

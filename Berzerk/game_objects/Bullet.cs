@@ -19,7 +19,7 @@ namespace Berzerk.game_objects
         protected PictureBox _bullet;
         protected Direction _viewDirection;
         System.Windows.Forms.Timer bulletTimer;
-        private IBulletUtility bulletUtility = new BulletCreator();
+        private IBulletUtility bulletUtility = new BulletPictureCreator();
         public int x { get => _bullet.Left; private set => _bullet.Left = value; }
         public int y { get => _bullet.Top; private set => _bullet.Top = value; }
 
