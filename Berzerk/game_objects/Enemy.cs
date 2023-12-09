@@ -20,7 +20,7 @@ namespace Berzerk.game_objects
             this._enemy = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._enemy)).BeginInit();
 
-            this._enemy.Load(@"C:\Users\ACER\source\repos\Berzerk\Berzerk\Properties\images\enemy.png");
+            this._enemy.Load(@"D:\Main\Gallery\code\Berzerk\Berzerk\Properties\images\enemy.png");
             this._enemy.Location = new System.Drawing.Point(x, y);
             this._enemy.Name = "enemy";
             this._enemy.Size = new System.Drawing.Size(26, 47);
