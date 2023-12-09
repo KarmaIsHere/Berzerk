@@ -1,4 +1,5 @@
 ﻿using Berzerk.game_objects;
+using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Berzerk.services
 {
     public class KeyBoardInput
     {
-        public void manageKeyIsDown(KeyEventArgs e, ref Player myPlayer)
+        public void manageKeyIsDown(KeyEventArgs e, IPlayer myPlayer)
         {
             if (e.KeyCode == Keys.Up && myPlayer.moving == false)
             {
@@ -36,7 +37,7 @@ namespace Berzerk.services
                 myPlayer.shooting = true;
             }
         }
-        public void manageKeyIsUp(KeyEventArgs e, ref Player myPlayer)
+        public void manageKeyIsUp(KeyEventArgs e, IPlayer myPlayer)
         {
             if (e.KeyCode == Keys.Up)
             {

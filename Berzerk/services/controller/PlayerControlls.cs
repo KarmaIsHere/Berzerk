@@ -1,5 +1,6 @@
 ﻿using Berzerk.game_objects;
 using Berzerk.helpers;
+using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Berzerk.services.controller
             this.form = form;
         }
 
-        public void checkPlayerInput(ref Player myPlayer, ref SceneInfo scene)
+        public void checkPlayerInput(IPlayer myPlayer, ref SceneInfo scene)
         {
             if (myPlayer.goUp && myPlayer.y > 0)
             {
