@@ -1,5 +1,4 @@
 ﻿using Berzerk.game_objects;
-using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Berzerk.services.collision
 {
     public class PlayerCollision
     {
-        public void checkEnemyTouchPlayer(IEnemyManager enemyManager,IPlayer myPlayer, ref GameProperties game)
+        public void checkEnemyTouchPlayer(ref EnemyManager enemyManager,ref Player myPlayer, ref GameProperties game)
         {
             foreach (Enemy enemy in enemyManager.getEnemies())
             {

@@ -4,20 +4,18 @@ using Berzerk.game_objects;
 using Berzerk.services;
 using Berzerk.services.collision;
 using Berzerk.services.controller;
-using Berzerk.interfaces;
 
 namespace Berzerk
 {
     public partial class LevelTemplate : Form
     {
-        private IPlayer myPlayer;
-        private IEnemyManager enemyManager;
-        private EnemyCollision enemyCollision;
-
+        private Player myPlayer;
         private PlayerControlls playerControlls;
         private SceneInfo scene;
+        private EnemyManager enemyManager;
         private KeyBoardInput keyBoardInput;
         private PlayerCollision playerCollision;
+        private EnemyCollision enemyCollision;
         private GameProperties gameProperties;
         private FlagCheck flagCheck;
         private BulletController bulletController;
@@ -31,17 +29,17 @@ namespace Berzerk
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
-            playerControlls.checkPlayerInput(myPlayer, ref scene);
+            playerControlls.checkPlayerInput(ref myPlayer, ref scene);
 
-            playerCollision.checkEnemyTouchPlayer(enemyManager,  myPlayer, ref gameProperties);
+            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref gameProperties);
 
-            enemyCollision.checkEnemyCollision(myPlayer, enemyManager, flagCheck);
+            enemyCollision.checkEnemyCollision(ref myPlayer, ref enemyManager, ref flagCheck);
 
             enemyManager.checkDeadEnemies(ref flagCheck);
 
             gameProperties.checkEnemyCount(enemyManager.enemyCount);
 
-            bulletController.checkDestroyedBullets(myPlayer);
+            bulletController.checkDestroyedBullets(ref myPlayer);
 
             if (gameProperties.isOver) setGameOver(gameProperties.isVicotry);
         }
@@ -51,7 +49,7 @@ namespace Berzerk
             if (isRestart)
             {
                 enemies = enemyManager.getEnemies();
-                restartGame.restart(ref enemies, myPlayer, ref gameOver);
+                restartGame.restart(ref enemies, ref myPlayer, ref gameOver);
             }
 
             enemyManager = new EnemyManager();
@@ -82,7 +80,7 @@ namespace Berzerk
         }
         private void keyIsDown(object sender, KeyEventArgs e)
         {
-            keyBoardInput.manageKeyIsDown(e, myPlayer);
+            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
             if (e.KeyCode == Keys.Enter && gameProperties.isOver)
             {
@@ -92,7 +90,7 @@ namespace Berzerk
         }
         private void keyIsUp(object sender, KeyEventArgs e)
         {
-            keyBoardInput.manageKeyIsUp(e, myPlayer);
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
         }
     }
 }

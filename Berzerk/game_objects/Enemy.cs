@@ -1,5 +1,4 @@
-﻿using Berzerk.interfaces;
-using Berzerk.Properties;
+﻿using Berzerk.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Berzerk.game_objects
 {
-    public class Enemy : Form, IEnemy
+    public class Enemy : Form
     {
         private PictureBox _enemy;
         public int x { get => _enemy.Top; set => _enemy.Top = value; }

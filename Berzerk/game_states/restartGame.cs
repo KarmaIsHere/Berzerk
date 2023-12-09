@@ -1,5 +1,4 @@
 ﻿using Berzerk.game_objects;
-using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Berzerk.game_states
 {
     public class restartGame
     {
-        public static void restart(ref List<Enemy> enemies, IPlayer myPlayer, ref GameOver gameOver)
+        public static void restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver)
         {
             foreach (Enemy thisEnemy in enemies)
             {

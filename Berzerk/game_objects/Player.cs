@@ -1,5 +1,4 @@
-﻿using Berzerk.interfaces;
-using Berzerk.Properties;
+﻿using Berzerk.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Berzerk.game_objects
 {
-    public class Player : Entity, IPlayer
+    public class Player : Entity
     {
         //public enum Direction { Up, Down, Left, Right };
 

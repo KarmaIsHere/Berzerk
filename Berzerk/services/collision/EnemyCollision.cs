@@ -1,6 +1,5 @@
 ﻿using Berzerk.game_objects;
 using Berzerk.helpers;
-using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +10,13 @@ namespace Berzerk.services.collision
 {
     public class EnemyCollision
     {
-        public void checkEnemyCollision(IPlayer player, IEnemyManager enemyManager, FlagCheck flagCheck)
+        public void checkEnemyCollision(ref Player myPlayer, ref EnemyManager enemyManager, ref FlagCheck flagCheck)
         {
-            foreach (Bullet thisBullet in player.getShotBullets())
+            foreach (Bullet thisBullet in myPlayer.getShotBullets())
             {
-                foreach (IEnemy thisEnemy in enemyManager.getEnemies())
+                foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
-                    if (thisBullet.isPictureBoxNull() == false && !thisEnemy.isEnemyBoxNull() && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
+                    if (thisBullet.isPictureBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
                     {
                         flagCheck.enemyShot = true;
                         thisEnemy.die();
@@ -26,7 +25,7 @@ namespace Berzerk.services.collision
                 }
                 if (thisBullet.isPictureBoxNull())
                 {
-                    player.reload();
+                    myPlayer.reload();
                 }
             }
         }

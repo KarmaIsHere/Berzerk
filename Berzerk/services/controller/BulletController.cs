@@ -1,5 +1,4 @@
 ﻿using Berzerk.game_objects;
-using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace Berzerk.services.controller
     {
         int index;
         int indexSave;
-        public void checkDestroyedBullets(IPlayer player)
+        public void checkDestroyedBullets(ref Player player)
         {
             int index = 0;
             int indexSave = -1;
