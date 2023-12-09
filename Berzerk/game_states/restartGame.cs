@@ -19,7 +19,7 @@ namespace Berzerk.game_states
 
             foreach (Bullet thisBullet in myPlayer.getShotBullets())
             {
-                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroyBullet();
+                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroy();
             }
             myPlayer.clearBullets();
 

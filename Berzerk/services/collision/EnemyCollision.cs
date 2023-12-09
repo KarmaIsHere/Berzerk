@@ -20,7 +20,7 @@ namespace Berzerk.services.collision
                     {
                         flagCheck.enemyShot = true;
                         thisEnemy.die();
-                        thisBullet.destroyBullet();
+                        thisBullet.destroy();
                     }
                 }
                 if (thisBullet.isPictureBoxNull())
