@@ -1,5 +1,6 @@
 ﻿using Berzerk.game_objects;
 using Berzerk.helpers;
+using Berzerk.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Berzerk.services
 {
-    public class EnemyManager
+    public class EnemyManager: IEnemyManager
     {
         private int _enemyCount = 0;
         public int enemyCount { get { return _enemyCount; } }
