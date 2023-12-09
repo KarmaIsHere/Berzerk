@@ -4,6 +4,7 @@ using Berzerk.game_objects;
 using Berzerk.services;
 using Berzerk.services.collision;
 using Berzerk.services.controller;
+using System.Net.Http.Headers;
 
 namespace Berzerk
 {
@@ -20,7 +21,9 @@ namespace Berzerk
         private FlagCheck flagCheck;
         private BulletController bulletController;
         private GameOver gameOver;
-
+        private PlayerPictureBoxManager playerPictureBoxManager;
+        private const int PLAYER_X_COORDINATES = 100;
+        private const int PLAYER_Y_COORDINATES = 100;
         public LevelTemplate()
         {
             InitializeComponent();
@@ -61,8 +64,8 @@ namespace Berzerk
             bulletController = new BulletController();
 
             scene = new SceneInfo(this.Height, this.Width);
-
-            myPlayer = new Player(Player.Direction.Left, 100, 100, this);
+            playerPictureBoxManager = new PlayerPictureBoxManager(PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES);
+            myPlayer = new Player(Player.Direction.Left, PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES, this, playerPictureBoxManager);
             playerControlls = new PlayerControlls(this);
 
             enemyManager.spawnEnemies(this,3, scene.height, scene.width);
