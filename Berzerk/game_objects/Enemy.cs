@@ -10,45 +10,30 @@ namespace Berzerk.game_objects
 {
     public class Enemy : Form
     {
-        private PictureBox _enemy;
-        public int x { get => _enemy.Top; set => _enemy.Top = value; }
-        public int y { get => _enemy.Left; set => _enemy.Left = value; }
+        private EnemyPictureBoxManager _spriteManager;
 
         public Enemy(Form form, int x, int y)
         {
-            this._enemy = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this._enemy)).BeginInit();
-
-            this._enemy.Load(@"C:\Users\Namai\source\repos\Berzerk\Berzerk\Properties\images\enemy.png");
-            this._enemy.Location = new System.Drawing.Point(x, y);
-            this._enemy.Name = "enemy";
-            this._enemy.Size = new System.Drawing.Size(26, 47);
-            this._enemy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this._enemy.TabIndex = 0;
-            this._enemy.TabStop = false;
-            this._enemy.Tag = "enemy";
-            form.Controls.Add(this._enemy);
+            _spriteManager = new EnemyPictureBoxManager(form, x, y);
         }
 
         public void removeEnemyBox(Form form)
         {
-            form.Controls.Remove(_enemy);
-            _enemy.Dispose();
+            _spriteManager.removeEnemySprite(form);
         }
 
         public Rectangle getBounds()
         {
-            return _enemy.Bounds;
+            return _spriteManager.getBounds();
         }
+
         public void die()
         {
-            _enemy.Dispose();
-            _enemy = null;
+            _spriteManager.dispose();
         }
         public bool isEnemyBoxNull()
         {
-            if (_enemy == null) return true;
-            return false;
+            return _spriteManager.isEnemyBoxNull();
         }
     }
 }

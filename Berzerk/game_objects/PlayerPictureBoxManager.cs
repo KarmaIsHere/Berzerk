@@ -8,8 +8,6 @@ namespace Berzerk.game_objects
 {
     public class PlayerPictureBoxManager
     {
-        private const string PATH_TO_PNG = @"C:\Users\Namai\source\repos\Berzerk\Berzerk\Properties\images\player.png";
-
         private PictureBox _playerPictureBox;
 
         public PlayerPictureBoxManager(int x, int y)
@@ -19,6 +17,9 @@ namespace Berzerk.game_objects
 
         public PictureBox createPlayerPictureBox(int x, int y)
         {
+            string projectPath = Directory.GetCurrentDirectory();
+            string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\player.png");
+
             PictureBox picture = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(picture)).BeginInit();
 
@@ -26,7 +27,7 @@ namespace Berzerk.game_objects
             picture.Name = "playerCharacter";
             picture.Tag = "player";
             picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            picture.Load(PATH_TO_PNG);
+            picture.Load(path);
             return picture;
         }
 

@@ -110,8 +110,7 @@ namespace Berzerk.game_objects
         }
         public override bool isPictureBoxNull()
         {
-            if (_bullet == null) return true;
-            return false;
+            return _bullet == null ? true : false;
         }
         
 

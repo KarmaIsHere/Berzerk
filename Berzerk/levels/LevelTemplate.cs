@@ -79,7 +79,7 @@ namespace Berzerk
         {
             gameTimer.Stop();
             gameProperties.isOver = true;
-            gameOver = new GameOver(this, gameProperties.isVicotry, scene.centerX, scene.centerY);
+            gameOver = new GameOver(this, gameProperties.isVicotry, 5, scene.centerY);
         }
         private void keyIsDown(object sender, KeyEventArgs e)
         {

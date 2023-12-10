@@ -23,24 +23,15 @@ namespace Berzerk.game_states
 
             label.Location = new Point(x, y);
             label.BackColor = Color.Red;
-            label.Size = new Size(500, 50);
+            label.Size = new Size(1500, 50);
             label.Font = new Font(label.Font.FontFamily, 24);
             label.BringToFront();
             form.Controls.Add(label);
         }
-
         public void destroyTextBox()
         {
             label.Dispose();
             label = null;
         }
-        public bool isEnemyBoxNull()
-        {
-            if (label == null) return true;
-            return false;
-        }
-
-
-
     }
 }
