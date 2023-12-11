@@ -21,7 +21,6 @@ namespace Berzerk.tests.services.collision
         {
             EnemyManager enemyManager = new EnemyManager();
             enemyManager.spawnEnemy(form,100,100);
-
             GameProperties game = new GameProperties();
 
             PlayerCollision playerCollision = new PlayerCollision();
