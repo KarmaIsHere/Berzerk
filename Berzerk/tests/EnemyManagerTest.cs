@@ -13,7 +13,7 @@ namespace Berzerk.tests
         private EnemyManager enemyManager;
 
         [Fact]
-        public void SpawnEnemy_ShouldAddEnemyToTheList()
+        public void spawnEnemyShouldAddEnemyToTheList()
         {
             Form form = new Form();
             int x = 100;
@@ -26,7 +26,7 @@ namespace Berzerk.tests
         }
 
         [Fact]
-        public void SpawnEnemies_ShouldAddNumberOfEnemiesToTheList()
+        public void spawnEnemiesShouldAddNumberOfEnemiesToTheList()
         {
             Form form = new Form();
             int count = 5;
@@ -40,7 +40,7 @@ namespace Berzerk.tests
         }
 
         [Fact]
-        public void CheckDeadEnemies_ShouldRemoveDeadEnemiesFromTheList()
+        public void checkDeadEnemiesShouldRemoveDeadEnemiesFromTheList()
         {
             Form form = new Form();
             int count = 5;

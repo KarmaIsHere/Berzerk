@@ -23,7 +23,7 @@ namespace Berzerk.tests.services
             keyBoardInput = new KeyBoardInput();
         }
         [Fact]
-        public void TestManageKeyIsDown_UpPressed_PlayerGoesUp()
+        public void manageKeyIsDownShouldGoUp()
         {
 
             KeyEventArgs e = new KeyEventArgs(Keys.Up);
@@ -35,7 +35,7 @@ namespace Berzerk.tests.services
         }
 
         [Fact]
-        public void TestManageKeyIsDown_DownPressed_PlayerGoesDown()
+        public void manageKeyIsDownShouldGoDown()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Down);
 
@@ -46,7 +46,7 @@ namespace Berzerk.tests.services
         }
 
         [Fact]
-        public void TestManageKeyIsDown_LeftPressed_PlayerGoesLeft()
+        public void manageKeyIsDownShouldGoLeft()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Left);
 
@@ -57,7 +57,7 @@ namespace Berzerk.tests.services
         }
 
         [Fact]
-        public void TestManageKeyIsDown_RightPressed_PlayerGoesRight()
+        public void manageKeyIsDownShouldGoRight()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Right);
 
@@ -68,7 +68,7 @@ namespace Berzerk.tests.services
         }
 
         [Fact]
-        public void TestManageKeyIsDown_SpacePressed_PlayerShoots()
+        public void manageKeyIsDownShouldShoot()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Space);
 
@@ -78,15 +78,58 @@ namespace Berzerk.tests.services
         }
 
         [Fact]
-        public void TestManageKeyIsDown_SpacePressedWhenAlreadyShooting_PlayerDoesNotShootAgain()
+        public void manageKeyIsDownShouldNotGoUp()
         {
-            myPlayer.shooting = true;
 
+            KeyEventArgs e = new KeyEventArgs(Keys.Up);
+
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+
+            Assert.False(myPlayer.goUp);
+            Assert.False(myPlayer.moving);
+        }
+
+        [Fact]
+        public void manageKeyIsDownShouldNotGoDown()
+        {
+            KeyEventArgs e = new KeyEventArgs(Keys.Down);
+
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+
+            Assert.False(myPlayer.goDown);
+            Assert.False(myPlayer.moving);
+        }
+
+        [Fact]
+        public void manageKeyIsDownShouldNotGoLeft()
+        {
+            KeyEventArgs e = new KeyEventArgs(Keys.Left);
+
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+
+            Assert.False(myPlayer.goLeft);
+            Assert.False(myPlayer.moving);
+        }
+
+        [Fact]
+        public void manageKeyIsDownShouldNotGoRight()
+        {
+            KeyEventArgs e = new KeyEventArgs(Keys.Right);
+
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+
+            Assert.False(myPlayer.goRight);
+            Assert.False(myPlayer.moving);
+        }
+
+        [Fact]
+        public void manageKeyIsDownShouldNotShoot()
+        {
             KeyEventArgs e = new KeyEventArgs(Keys.Space);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.True(myPlayer.shooting);
+            Assert.False(myPlayer.shooting);
         }
 
     }
