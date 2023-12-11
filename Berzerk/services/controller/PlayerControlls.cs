@@ -14,30 +14,30 @@ namespace Berzerk.services.controller
 
         public void checkPlayerInput(ref Player myPlayer, ref SceneInfo scene)
         {
-            if (myPlayer.goUp && myPlayer.y > 0)
+            if (myPlayer.GoUp && myPlayer.y > 0)
             {
-                myPlayer.move(Entity.Direction.Up);
+                myPlayer.Move(Entity.Direction.Up);
             }
-            if (myPlayer.goDown && myPlayer.y < scene.height - 100)
+            if (myPlayer.GoDown && myPlayer.y < scene.Height - 100)
             {
-                myPlayer.move(Entity.Direction.Down);
+                myPlayer.Move(Entity.Direction.Down);
             }
-            if (myPlayer.goLeft && myPlayer.x > 0)
+            if (myPlayer.GoLeft && myPlayer.x > 0)
             {
-                myPlayer.move(Entity.Direction.Left);
+                myPlayer.Move(Entity.Direction.Left);
             }
-            if (myPlayer.goRight && myPlayer.x < scene.width - 50)
+            if (myPlayer.GoRight && myPlayer.x < scene.Width - 50)
             {
-                myPlayer.move(Entity.Direction.Right);
+                myPlayer.Move(Entity.Direction.Right);
             }
-            if(myPlayer.getShotBullets().Count < 1)
+            if (myPlayer.GetShotBullets().Count < 1)
             {
-                myPlayer.reload();
+                myPlayer.Reload();
             }
-            if (myPlayer.shooting && myPlayer.ammo > 0)
+            if (myPlayer.Shooting && myPlayer.Ammo > 0)
             {
-                myPlayer.shoot(form);
-                myPlayer.shooting = false;
+                myPlayer.Shoot(form);
+                myPlayer.Shooting = false;
             }
         }
     }

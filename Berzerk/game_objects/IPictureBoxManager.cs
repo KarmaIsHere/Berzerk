@@ -2,11 +2,11 @@
 {
     public interface IPictureBoxManager
     {
-        void generateSprite(int x, int y);
-        void removeSprite(Form form);
-        Rectangle getBounds();
-        void dispose();
-        bool isEnemyBoxNull();
-        PictureBox getSprite();
+        void GenerateSprite(int x, int y);
+        void RemoveSprite(Form form);
+        Rectangle GetBounds();
+        void Dispose();
+        bool IsEnemyBoxNull();
+        PictureBox GetSprite();
     }
 }

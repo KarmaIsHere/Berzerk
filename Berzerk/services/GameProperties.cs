@@ -1,6 +1,6 @@
 ﻿namespace Berzerk.services
 {
-    public  class GameProperties
+    public class GameProperties
     {
         private bool _isOver;
         private bool _isVictory;

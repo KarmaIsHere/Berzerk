@@ -35,7 +35,7 @@
             // gameTimer
             // 
             this.gameTimer.Interval = 1;
-            this.gameTimer.Tick += new System.EventHandler(this.gameTimerEvent);
+            this.gameTimer.Tick += new System.EventHandler(this.GameTimerEvent);
             // 
             // LevelTemplate
             // 
@@ -45,8 +45,8 @@
             this.ClientSize = new System.Drawing.Size(1200, 600);
             this.Name = "LevelTemplate";
             this.Text = "Berzerk";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             this.ResumeLayout(false);
 
         }

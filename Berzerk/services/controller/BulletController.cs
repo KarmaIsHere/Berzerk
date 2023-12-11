@@ -10,15 +10,15 @@ namespace Berzerk.services.controller
         {
             int index = 0;
             int indexSave = -1;
-            foreach (Bullet bullet in player.getShotBullets())
+            foreach (Bullet bullet in player.GetShotBullets())
             {
-                if (bullet.isPictureBoxNull())
+                if (bullet.IsPictureBoxNull())
                 {
                     indexSave = index;
                 }
                 index++;
             }
-            if (indexSave != -1) player.removeBullet(indexSave);
+            if (indexSave != -1) player.RemoveBullet(indexSave);
         }
     }
 }

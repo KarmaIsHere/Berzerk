@@ -25,8 +25,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
-            Assert.True(myPlayer.goUp);
-            Assert.True(myPlayer.moving);
+            Assert.True(myPlayer.GoUp);
+            Assert.True(myPlayer.Moving);
         }
 
         [Fact]
@@ -36,8 +36,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
-            Assert.True(myPlayer.goDown);
-            Assert.True(myPlayer.moving);
+            Assert.True(myPlayer.GoDown);
+            Assert.True(myPlayer.Moving);
         }
 
         [Fact]
@@ -47,8 +47,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
-            Assert.True(myPlayer.goLeft);
-            Assert.True(myPlayer.moving);
+            Assert.True(myPlayer.GoLeft);
+            Assert.True(myPlayer.Moving);
         }
 
         [Fact]
@@ -58,8 +58,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
-            Assert.True(myPlayer.goRight);
-            Assert.True(myPlayer.moving);
+            Assert.True(myPlayer.GoRight);
+            Assert.True(myPlayer.Moving);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
-            Assert.True(myPlayer.shooting);
+            Assert.True(myPlayer.Shooting);
         }
 
         [Fact]
@@ -80,8 +80,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.False(myPlayer.goUp);
-            Assert.False(myPlayer.moving);
+            Assert.False(myPlayer.GoUp);
+            Assert.False(myPlayer.Moving);
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.False(myPlayer.goDown);
-            Assert.False(myPlayer.moving);
+            Assert.False(myPlayer.GoDown);
+            Assert.False(myPlayer.Moving);
         }
 
         [Fact]
@@ -102,8 +102,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.False(myPlayer.goLeft);
-            Assert.False(myPlayer.moving);
+            Assert.False(myPlayer.GoLeft);
+            Assert.False(myPlayer.Moving);
         }
 
         [Fact]
@@ -113,8 +113,8 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.False(myPlayer.goRight);
-            Assert.False(myPlayer.moving);
+            Assert.False(myPlayer.GoRight);
+            Assert.False(myPlayer.Moving);
         }
 
         [Fact]
@@ -124,7 +124,7 @@ namespace Berzerk.tests.services
 
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
 
-            Assert.False(myPlayer.shooting);
+            Assert.False(myPlayer.Shooting);
         }
 
     }

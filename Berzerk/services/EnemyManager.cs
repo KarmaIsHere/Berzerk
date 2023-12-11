@@ -39,7 +39,7 @@ namespace Berzerk.services
             {
                 foreach (Enemy thisEnemy in enemies)
                 {
-                    if (thisEnemy.isEnemyBoxNull())
+                    if (thisEnemy.IsEnemyBoxNull())
                     {
                         flagCheck.enemyShot = false;
                         enemyIndexSave = enemyIndex;

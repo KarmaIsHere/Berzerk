@@ -2,7 +2,7 @@
 {
     public class Player : Entity
     {
-        
+
         private bool _goUp;
         private bool _goDown;
         private bool _goLeft;
@@ -18,18 +18,18 @@
         readonly IPictureBoxManager pictureBoxManager;
         readonly List<Bullet> shotBullets = new();
 
-        public bool goUp { get => _goUp; set => _goUp = value; }
-        public bool goDown { get => _goDown; set => _goDown = value; }
-        public bool goLeft { get => _goLeft; set => _goLeft = value; }
-        public bool goRight { get => _goRight; set => _goRight = value; }
-        public bool shooting { get => _shooting; set => _shooting = value; }
-        public bool moving { get => _moving; set => _moving = value; }  
-        public int x { get => pictureBoxManager.getSprite().Left; private set => pictureBoxManager.getSprite().Left = value; }
-        public int y { get => pictureBoxManager.getSprite().Top; private set => pictureBoxManager.getSprite().Top = value; }
-        public int width { get => pictureBoxManager.getSprite().Width; set => pictureBoxManager.getSprite().Width = value;}
-        public int height { get => pictureBoxManager.getSprite().Height; set => pictureBoxManager.getSprite().Height = value;}
-        public int ammo { get => _ammo; set => _ammo = value; } 
-        public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
+        public bool GoUp { get => _goUp; set => _goUp = value; }
+        public bool GoDown { get => _goDown; set => _goDown = value; }
+        public bool GoLeft { get => _goLeft; set => _goLeft = value; }
+        public bool GoRight { get => _goRight; set => _goRight = value; }
+        public bool Shooting { get => _shooting; set => _shooting = value; }
+        public bool Moving { get => _moving; set => _moving = value; }
+        public int x { get => pictureBoxManager.GetSprite().Left; private set => pictureBoxManager.GetSprite().Left = value; }
+        public int y { get => pictureBoxManager.GetSprite().Top; private set => pictureBoxManager.GetSprite().Top = value; }
+        public int Width { get => pictureBoxManager.GetSprite().Width; set => pictureBoxManager.GetSprite().Width = value; }
+        public int Height { get => pictureBoxManager.GetSprite().Height; set => pictureBoxManager.GetSprite().Height = value; }
+        public int Ammo { get => _ammo; set => _ammo = value; }
+        public int MaxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
         public Player(Direction viewDirection, int x, int y, IPictureBoxManager playerPictureBoxManager)
         {
@@ -47,19 +47,19 @@
             this.y = y;
             this.x = x;
         }
-        public void setDirection(Direction direction)
+        public void SetDirection(Direction direction)
         {
             _viewDirection = direction;
         }
 
-        public Direction getDirection()
+        public Direction GetDirection()
         {
             return _viewDirection;
         }
 
-        public override void move(Direction direction)
+        public override void Move(Direction direction)
         {
-            setDirection(direction);
+            SetDirection(direction);
             xSpeedTick = 0;
             ySpeedTick = 0;
             switch (direction)
@@ -80,41 +80,41 @@
             this.x += xSpeedTick;
             this.y += ySpeedTick;
         }
-        public void shoot(Form form)
+        public void Shoot(Form form)
         {
             _ammo -= 1;
             shotBullets.Add(new Bullet(12));
-            shotBullets.Last().spawn(this, form);
+            shotBullets.Last().Spawn(this, form);
         }
-        public void reload()
+        public void Reload()
         {
-            _ammo = maxAmmoSize;
+            _ammo = MaxAmmoSize;
         }
-        public List<Bullet> getShotBullets()
+        public List<Bullet> GetShotBullets()
         {
             return shotBullets;
         }
-        public void removeBullet(int index)
+        public void RemoveBullet(int index)
         {
             shotBullets.RemoveAt(index);
         }
 
-        public void clearBullets()
+        public void ClearBullets()
         {
             shotBullets.Clear();
         }
 
-        public override void destroy()
+        public override void Destroy()
         {
-            pictureBoxManager.dispose();
+            pictureBoxManager.Dispose();
         }
 
-        public override Rectangle getBounds()
+        public override Rectangle GetBounds()
         {
-            return pictureBoxManager.getBounds();
+            return pictureBoxManager.GetBounds();
         }
 
-        public override bool isPictureBoxNull()
+        public override bool IsPictureBoxNull()
         {
             throw new NotImplementedException();
         }

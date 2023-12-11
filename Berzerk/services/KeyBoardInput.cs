@@ -6,56 +6,56 @@ namespace Berzerk.services
     {
         public void manageKeyIsDown(KeyEventArgs e, ref Player myPlayer)
         {
-            if (e.KeyCode == Keys.Up && myPlayer.moving == false)
+            if (e.KeyCode == Keys.Up && myPlayer.Moving == false)
             {
-                myPlayer.goUp = true;
-                myPlayer.moving = true;
+                myPlayer.GoUp = true;
+                myPlayer.Moving = true;
             }
-            if (e.KeyCode == Keys.Down && myPlayer.moving == false)
+            if (e.KeyCode == Keys.Down && myPlayer.Moving == false)
             {
-                myPlayer.goDown = true;
-                myPlayer.moving = true;
+                myPlayer.GoDown = true;
+                myPlayer.Moving = true;
             }
-            if (e.KeyCode == Keys.Left && myPlayer.moving == false)
+            if (e.KeyCode == Keys.Left && myPlayer.Moving == false)
             {
-                myPlayer.goLeft = true;
-                myPlayer.moving = true;
+                myPlayer.GoLeft = true;
+                myPlayer.Moving = true;
             }
-            if (e.KeyCode == Keys.Right && myPlayer.moving == false)
+            if (e.KeyCode == Keys.Right && myPlayer.Moving == false)
             {
-                myPlayer.goRight = true;
-                myPlayer.moving = true;
+                myPlayer.GoRight = true;
+                myPlayer.Moving = true;
             }
-            if (e.KeyCode == Keys.Space && myPlayer.shooting == false)
+            if (e.KeyCode == Keys.Space && myPlayer.Shooting == false)
             {
-                myPlayer.shooting = true;
+                myPlayer.Shooting = true;
             }
         }
         public void manageKeyIsUp(KeyEventArgs e, ref Player myPlayer)
         {
             if (e.KeyCode == Keys.Up)
             {
-                myPlayer.goUp = false;
-                myPlayer.moving = false;
+                myPlayer.GoUp = false;
+                myPlayer.Moving = false;
             }
             if (e.KeyCode == Keys.Down)
             {
-                myPlayer.goDown = false;
-                myPlayer.moving = false;
+                myPlayer.GoDown = false;
+                myPlayer.Moving = false;
             }
             if (e.KeyCode == Keys.Left)
             {
-                myPlayer.goLeft = false;
-                myPlayer.moving = false;
+                myPlayer.GoLeft = false;
+                myPlayer.Moving = false;
             }
             if (e.KeyCode == Keys.Right)
             {
-                myPlayer.goRight = false;
-                myPlayer.moving = false;
+                myPlayer.GoRight = false;
+                myPlayer.Moving = false;
             }
             if (e.KeyCode == Keys.Space)
             {
-                myPlayer.shooting = false;
+                myPlayer.Shooting = false;
             }
         }
     }

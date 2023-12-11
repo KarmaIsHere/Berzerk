@@ -7,20 +7,20 @@ namespace Berzerk.services.collision
     {
         public void checkEnemyCollision(ref Player myPlayer, ref EnemyManager enemyManager, ref FlagCheck flagCheck)
         {
-            foreach (Bullet thisBullet in myPlayer.getShotBullets())
+            foreach (Bullet thisBullet in myPlayer.GetShotBullets())
             {
                 foreach (Enemy thisEnemy in enemyManager.getEnemies())
                 {
-                    if (thisBullet.isPictureBoxNull() == false && thisEnemy.isEnemyBoxNull() == false && thisEnemy.getBounds().IntersectsWith(thisBullet.getBounds()))
+                    if (thisBullet.IsPictureBoxNull() == false && thisEnemy.IsEnemyBoxNull() == false && thisEnemy.GetBounds().IntersectsWith(thisBullet.GetBounds()))
                     {
                         flagCheck.enemyShot = true;
-                        thisEnemy.die();
-                        thisBullet.destroy();
+                        thisEnemy.Die();
+                        thisBullet.Destroy();
                     }
                 }
-                if (thisBullet.isPictureBoxNull())
+                if (thisBullet.IsPictureBoxNull())
                 {
-                    myPlayer.reload();
+                    myPlayer.Reload();
                 }
             }
         }

@@ -10,17 +10,18 @@ namespace Berzerk.tests.services.collision
         private Form form;
         private Player myPlayer;
         private IPictureBoxManager playerPictureBoxManager;
-        public PlayerCollisionTests() {
+        public PlayerCollisionTests()
+        {
             form = new Form();
             playerPictureBoxManager = new PlayerPictureBoxManager(form, 100, 100);
             myPlayer = new Player(Player.Direction.Left, 100, 100, playerPictureBoxManager);
-        }   
+        }
 
         [Fact]
         public void checkEnemyTouchPlayerShouldEnemyTouchPlayer()
         {
             EnemyManager enemyManager = new EnemyManager();
-            enemyManager.spawnEnemy(form,100,100);
+            enemyManager.spawnEnemy(form, 100, 100);
             GameProperties game = new GameProperties();
 
             PlayerCollision playerCollision = new PlayerCollision();

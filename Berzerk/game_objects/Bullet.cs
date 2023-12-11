@@ -18,72 +18,74 @@
             this._bulletSpeed = bulletSpeed;
         }
 
-        public void spawn(Player myPlayer, Form form)
+        public void Spawn(Player myPlayer, Form form)
         {
-            this._bullet = BulletPictureBoxManager.createBulletPictureBox(myPlayer, form);
-            setDirection(myPlayer.getDirection());
+            this._bullet = BulletPictureBoxManager.CreateBulletPictureBox(myPlayer, form);
+            SetDirection(myPlayer.GetDirection());
             switch (_viewDirection)
             {
                 case Direction.Up:
                     y = -30 + myPlayer.y;
-                    x = myPlayer.width / 2 + myPlayer.x;
+                    x = myPlayer.Width / 2 + myPlayer.x;
                     _ySpeedTick = -_bulletSpeed;
                     break;
 
                 case Direction.Down:
                     y = 60 + myPlayer.y;
-                    x = myPlayer.width / 2 + myPlayer.x;
+                    x = myPlayer.Width / 2 + myPlayer.x;
                     _ySpeedTick = _bulletSpeed;
                     break;
 
                 case Direction.Left:
-                    y = myPlayer.height/ 2 + myPlayer.y;
+                    y = myPlayer.Height / 2 + myPlayer.y;
                     x = -30 + myPlayer.x;
                     _xSpeedTick = -_bulletSpeed;
                     break;
 
                 case Direction.Right:
-                    y = myPlayer.height / 2 + myPlayer.y;
+                    y = myPlayer.Height / 2 + myPlayer.y;
                     x = 30 + myPlayer.x;
                     _xSpeedTick = _bulletSpeed;
                     break;
             }
-            createBulletTimer();
+            CreateBulletTimer();
         }
 
-        public void makeVertical()
+        public void MakeVertical()
         {
             this._bullet.Size = new System.Drawing.Size(5, 20);
         }
-        public void setDirection(Direction direction)
+        public void SetDirection(Direction direction)
         {
             this._viewDirection = direction;
         }
-        public Direction getDirection()
+        public Direction GetDirection()
         {
             return this._viewDirection;
         }
-        private void createBulletTimer()
+        private void CreateBulletTimer()
         {
-            bulletTimer = new System.Windows.Forms.Timer();
-            bulletTimer.Interval = _bulletSpeed;
-            bulletTimer.Tick += new EventHandler(bulletMoveTick);
+            bulletTimer = new System.Windows.Forms.Timer
+            {
+                Interval = _bulletSpeed
+            };
+            bulletTimer.Tick += new EventHandler(BulletMoveTick);
             bulletTimer.Start();
         }
-        public void bulletMoveTick(object sender, EventArgs e)
+        public void BulletMoveTick(object sender, EventArgs e)
         {
-            move(_viewDirection);           
+            Move(_viewDirection);
             if (x > 1192 || x < 0 || y < 0 || y > 617)
             {
-                destroy();
+                Destroy();
             }
         }
-        public override void move(Direction direction)
+        public override void Move(Direction direction)
         {
             this.x += _xSpeedTick;
             this.y += _ySpeedTick;
         }
-        public override void destroy()
+        public override void Destroy()
         {
             bulletTimer.Stop();
             bulletTimer.Dispose();
@@ -91,15 +93,15 @@
             bulletTimer = null;
             _bullet = null;
         }
-        public override Rectangle getBounds()
+        public override Rectangle GetBounds()
         {
             return _bullet.Bounds;
         }
-        public override bool isPictureBoxNull()
+        public override bool IsPictureBoxNull()
         {
             return _bullet == null;
         }
-        
+
 
     }
 }

@@ -9,23 +9,23 @@
             _spriteManager = new EnemyPictureBoxManager(form, x, y);
         }
 
-        public void removeEnemyBox(Form form)
+        public void RemoveEnemyBox(Form form)
         {
-            _spriteManager.removeSprite(form);
+            _spriteManager.RemoveSprite(form);
         }
 
-        public Rectangle getBounds()
+        public Rectangle GetBounds()
         {
-            return _spriteManager.getBounds();
+            return _spriteManager.GetBounds();
         }
 
-        public void die()
+        public void Die()
         {
-            _spriteManager.dispose();
+            _spriteManager.Dispose();
         }
-        public bool isEnemyBoxNull()
+        public bool IsEnemyBoxNull()
         {
-            return _spriteManager.isEnemyBoxNull();
+            return _spriteManager.IsEnemyBoxNull();
         }
     }
 }

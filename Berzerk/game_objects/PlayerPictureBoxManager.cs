@@ -6,11 +6,11 @@
 
         public PlayerPictureBoxManager(Form form, int x, int y)
         {
-             generateSprite(x, y);
+            GenerateSprite(x, y);
             form.Controls.Add(playerSprite);
         }
 
-        public void generateSprite(int x, int y)
+        public void GenerateSprite(int x, int y)
         {
             string projectPath = Directory.GetCurrentDirectory();
             string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\player.png");
@@ -26,12 +26,12 @@
             playerSprite = picture;
         }
 
-        public PictureBox getSprite()
+        public PictureBox GetSprite()
         {
             return playerSprite;
         }
 
-        public void dispose()
+        public void Dispose()
         {
             if (playerSprite != null)
             {
@@ -40,17 +40,17 @@
             }
         }
 
-        public bool isEnemyBoxNull()
+        public bool IsEnemyBoxNull()
         {
             return playerSprite == null;
         }
 
-        public void removeSprite(Form form)
+        public void RemoveSprite(Form form)
         {
             throw new NotImplementedException();
         }
 
-        public Rectangle getBounds()
+        public Rectangle GetBounds()
         {
             return playerSprite.Bounds;
         }

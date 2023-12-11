@@ -26,7 +26,7 @@ namespace Berzerk.tests
         public void spawnEnemiesShouldAddNumberOfEnemiesToTheList()
         {
             Form form = new Form();
-            const int  expectedCount = 5;
+            const int expectedCount = 5;
             int amountOfEnemies = 5;
             int sceneHeight = 600;
             int sceneWidth = 1000;

@@ -26,10 +26,10 @@ namespace Berzerk
         public LevelTemplate()
         {
             InitializeComponent();
-            gameRestart(false);
+            GameRestart(false);
         }
 
-        private void gameTimerEvent(object sender, EventArgs e)
+        private void GameTimerEvent(object sender, EventArgs e)
         {
             playerControlls.checkPlayerInput(ref myPlayer, ref scene);
 
@@ -43,15 +43,15 @@ namespace Berzerk
 
             bulletController.checkDestroyedBullets(ref myPlayer);
 
-            if (gameProperties.isOver) setGameOver(gameProperties.isVicotry);
+            if (gameProperties.isOver) SetGameOver(gameProperties.isVicotry);
         }
-        public void gameRestart(bool isRestart)
+        public void GameRestart(bool isRestart)
         {
             List<Enemy> enemies;
             if (isRestart)
             {
                 enemies = enemyManager.getEnemies();
-                restartGame.restart(ref enemies, ref myPlayer, ref gameOver);
+                RestartGame.Restart(ref enemies, ref myPlayer, ref gameOver);
             }
 
             enemyManager = new EnemyManager();
@@ -67,30 +67,30 @@ namespace Berzerk
             myPlayer = new Player(Player.Direction.Left, PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES, playerPictureBoxManager);
             playerControlls = new PlayerControlls(this);
 
-            enemyManager.spawnEnemies(this,3, scene.height, scene.width);
+            enemyManager.spawnEnemies(this, 3, scene.Height, scene.Width);
 
             flagCheck = new FlagCheck();
 
             gameTimer.Start();
         }
 
-        public void setGameOver(bool isWinner)
+        public void SetGameOver(bool isWinner)
         {
             gameTimer.Stop();
             gameProperties.isOver = true;
-            gameOver = new GameOver(this, gameProperties.isVicotry, 5, scene.centerY);
+            gameOver = new GameOver(this, gameProperties.isVicotry, 5, scene.CenterY);
         }
-        private void keyIsDown(object sender, KeyEventArgs e)
+        private void KeyIsDown(object sender, KeyEventArgs e)
         {
             keyBoardInput.manageKeyIsDown(e, ref myPlayer);
 
             if (e.KeyCode == Keys.Enter && gameProperties.isOver)
             {
                 gameProperties.isOver = false;
-                gameRestart(true);
+                GameRestart(true);
             }
         }
-        private void keyIsUp(object sender, KeyEventArgs e)
+        private void KeyIsUp(object sender, KeyEventArgs e)
         {
             keyBoardInput.manageKeyIsUp(e, ref myPlayer);
         }

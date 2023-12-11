@@ -2,18 +2,18 @@
 {
     public class SceneInfo
     {
-        public int height { get; private set; }
-        public int width { get; private set; }
+        public int Height { get; private set; }
+        public int Width { get; private set; }
 
-        public int centerX { get; private set; }
-        public int centerY { get; private set; }
+        public int CenterX { get; private set; }
+        public int CenterY { get; private set; }
 
         public SceneInfo(int height, int width)
         {
-            this.height = height;
-            this.width = width;
-            centerX = width / 2;
-            centerY = height / 2;
+            this.Height = height;
+            this.Width = width;
+            CenterX = width / 2;
+            CenterY = height / 2;
         }
     }
 }

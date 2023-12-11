@@ -18,7 +18,7 @@
             label.BringToFront();
             form.Controls.Add(label);
         }
-        public void destroyTextBox()
+        public void DestroyTextBox()
         {
             label.Dispose();
             label = null;

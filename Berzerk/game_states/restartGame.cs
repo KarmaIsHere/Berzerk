@@ -2,28 +2,28 @@
 
 namespace Berzerk.game_states
 {
-    public class restartGame
+    public class RestartGame
     {
-        public static void restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver)
+        public static void Restart(ref List<Enemy> enemies, ref Player myPlayer, ref GameOver gameOver)
         {
             foreach (Enemy thisEnemy in enemies)
             {
-                if (thisEnemy.isEnemyBoxNull() == false) thisEnemy.die();
+                if (thisEnemy.IsEnemyBoxNull() == false) thisEnemy.Die();
             }
             enemies.Clear();
 
-            foreach (Bullet thisBullet in myPlayer.getShotBullets())
+            foreach (Bullet thisBullet in myPlayer.GetShotBullets())
             {
-                if (thisBullet.isPictureBoxNull() == false) thisBullet.destroy();
+                if (thisBullet.IsPictureBoxNull() == false) thisBullet.Destroy();
             }
-            myPlayer.clearBullets();
+            myPlayer.ClearBullets();
 
-            myPlayer.destroy();
+            myPlayer.Destroy();
             myPlayer = null;
 
-            gameOver.destroyTextBox();
+            gameOver.DestroyTextBox();
             gameOver = null;
-            
+
         }
     }
 }

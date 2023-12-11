@@ -3,9 +3,9 @@
     public abstract class Entity
     {
         public enum Direction { Up, Down, Left, Right };
-        abstract public void move(Direction direction);
-        abstract public void destroy();
-        abstract public Rectangle getBounds();
-        abstract public bool isPictureBoxNull();
+        abstract public void Move(Direction direction);
+        abstract public void Destroy();
+        abstract public Rectangle GetBounds();
+        abstract public bool IsPictureBoxNull();
     }
 }
