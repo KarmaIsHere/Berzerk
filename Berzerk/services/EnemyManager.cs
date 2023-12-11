@@ -12,8 +12,9 @@ namespace Berzerk.services
     {
         private int _enemyCount = 0;
         public int enemyCount { get { return _enemyCount; } }
-        List<Enemy> enemies = new List<Enemy>();
+        public List<Enemy> enemies;
 
+        public EnemyManager() { enemies = new List<Enemy>(); }
         public List<Enemy> getEnemies()
         {
             return enemies;
