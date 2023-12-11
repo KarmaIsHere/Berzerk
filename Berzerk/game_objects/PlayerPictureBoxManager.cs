@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Berzerk.game_objects
 {
-    public class PlayerPictureBoxManager
+    public class PlayerPictureBoxManager : IPictureBoxManager
     {
-        private PictureBox _playerPictureBox;
+        private PictureBox playerSprite;
 
-        public PlayerPictureBoxManager(int x, int y)
+        public PlayerPictureBoxManager(Form form, int x, int y)
         {
-            _playerPictureBox = createPlayerPictureBox(x, y);
+             generateSprite(x, y);
+            form.Controls.Add(playerSprite);
         }
 
-        public PictureBox createPlayerPictureBox(int x, int y)
+        public void generateSprite(int x, int y)
         {
             string projectPath = Directory.GetCurrentDirectory();
             string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\player.png");
@@ -28,12 +30,36 @@ namespace Berzerk.game_objects
             picture.Tag = "player";
             picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             picture.Load(path);
-            return picture;
+            playerSprite = picture;
         }
 
-        public PictureBox getPlayerPictureBox()
+        public PictureBox getSprite()
         {
-            return _playerPictureBox;
+            return playerSprite;
+        }
+
+        public void dispose()
+        {
+            if (playerSprite != null)
+            {
+                playerSprite.Dispose();
+                playerSprite = null;
+            }
+        }
+
+        public bool isEnemyBoxNull()
+        {
+            return playerSprite == null ? true : false;
+        }
+
+        public void removeSprite(Form form)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Rectangle getBounds()
+        {
+            return playerSprite.Bounds;
         }
     }
 }

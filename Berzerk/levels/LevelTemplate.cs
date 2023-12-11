@@ -21,7 +21,7 @@ namespace Berzerk
         private FlagCheck flagCheck;
         private BulletController bulletController;
         private GameOver gameOver;
-        private PlayerPictureBoxManager playerPictureBoxManager;
+        private IPictureBoxManager playerPictureBoxManager;
         private const int PLAYER_X_COORDINATES = 100;
         private const int PLAYER_Y_COORDINATES = 100;
         public LevelTemplate()
@@ -64,8 +64,8 @@ namespace Berzerk
             bulletController = new BulletController();
 
             scene = new SceneInfo(this.Height, this.Width);
-            playerPictureBoxManager = new PlayerPictureBoxManager(PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES);
-            myPlayer = new Player(Player.Direction.Left, PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES, this, playerPictureBoxManager);
+            playerPictureBoxManager = new PlayerPictureBoxManager(this, PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES);
+            myPlayer = new Player(Player.Direction.Left, PLAYER_X_COORDINATES, PLAYER_Y_COORDINATES, playerPictureBoxManager);
             playerControlls = new PlayerControlls(this);
 
             enemyManager.spawnEnemies(this,3, scene.height, scene.width);

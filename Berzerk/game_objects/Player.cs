@@ -20,13 +20,11 @@ namespace Berzerk.game_objects
         private bool _moving;
         protected Direction _viewDirection;
         private int _playerSpeed;
-        private PictureBox _player;
         private int _ammo;
         private int _maxAmmoSize;
-
         private int xSpeedTick;
         private int ySpeedTick;
-
+        IPictureBoxManager pictureBoxManager;
         List<Bullet> shotBullets = new List<Bullet>();
 
         public bool goUp { get => _goUp; set => _goUp = value; }
@@ -35,14 +33,14 @@ namespace Berzerk.game_objects
         public bool goRight { get => _goRight; set => _goRight = value; }
         public bool shooting { get => _shooting; set => _shooting = value; }
         public bool moving { get => _moving; set => _moving = value; }  
-        public int x { get => _player.Left; private set => _player.Left = value; }
-        public int y { get => _player.Top; private set => _player.Top = value; }
-        public int width { get => _player.Width; set => _player.Width = value;}
-        public int height { get => _player.Height; set => _player.Height = value;}
+        public int x { get => pictureBoxManager.getSprite().Left; private set => pictureBoxManager.getSprite().Left = value; }
+        public int y { get => pictureBoxManager.getSprite().Top; private set => pictureBoxManager.getSprite().Top = value; }
+        public int width { get => pictureBoxManager.getSprite().Width; set => pictureBoxManager.getSprite().Width = value;}
+        public int height { get => pictureBoxManager.getSprite().Height; set => pictureBoxManager.getSprite().Height = value;}
         public int ammo { get => _ammo; set => _ammo = value; } 
         public int maxAmmoSize { get => _maxAmmoSize; set => _maxAmmoSize = value; }
 
-        public Player(Direction viewDirection, int x, int y, Form form, PlayerPictureBoxManager playerPictureBoxManager)
+        public Player(Direction viewDirection, int x, int y, IPictureBoxManager playerPictureBoxManager)
         {
             _goUp = false;
             _goDown = false;
@@ -54,10 +52,9 @@ namespace Berzerk.game_objects
             _playerSpeed = 2;
             _ammo = 1;
             _maxAmmoSize = 1;
-            this._player = playerPictureBoxManager.createPlayerPictureBox(x,y);
+            pictureBoxManager = playerPictureBoxManager;
             this.y = y;
             this.x = x;
-            form.Controls.Add(this._player);
         }
         public void setDirection(Direction direction)
         {
@@ -115,19 +112,20 @@ namespace Berzerk.game_objects
         {
             shotBullets.Clear();
         }
-        public override Rectangle getBounds()
-        {
-            return _player.Bounds;
-        }
+
         public override void destroy()
         {
-            _player.Dispose();
-            _player = null;
+            pictureBoxManager.dispose();
         }
+
+        public override Rectangle getBounds()
+        {
+            return pictureBoxManager.getBounds();
+        }
+
         public override bool isPictureBoxNull()
         {
-            if (_player == null) return true;
-            return false;
+            throw new NotImplementedException();
         }
     }
 }

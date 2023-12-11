@@ -19,7 +19,7 @@ namespace Berzerk.game_objects
 
         public void removeEnemyBox(Form form)
         {
-            _spriteManager.removeEnemySprite(form);
+            _spriteManager.removeSprite(form);
         }
 
         public Rectangle getBounds()

@@ -8,11 +8,17 @@ using System.Windows.Forms;
 
 namespace Berzerk.game_objects
 {
-    public class EnemyPictureBoxManager
+    public class EnemyPictureBoxManager : IPictureBoxManager
     {
         private PictureBox enemySprite;
 
         public EnemyPictureBoxManager(Form form, int x, int y)
+        {
+            generateSprite(x,y);
+            form.Controls.Add(enemySprite);
+        }
+
+        public void generateSprite(int x, int y)
         {
             string projectPath = Directory.GetCurrentDirectory();
             string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\enemy.png");
@@ -24,10 +30,9 @@ namespace Berzerk.game_objects
             enemySprite.TabIndex = 0;
             enemySprite.TabStop = false;
             enemySprite.Tag = "enemy";
-            form.Controls.Add(enemySprite);
         }
 
-        public void removeEnemySprite(Form form)
+        public void removeSprite(Form form)
         {
             form.Controls.Remove(enemySprite);
             enemySprite.Dispose();
@@ -50,6 +55,11 @@ namespace Berzerk.game_objects
         public bool isEnemyBoxNull()
         {
             return enemySprite == null ? true : false;
+        }
+
+        public PictureBox getSprite()
+        {
+            return enemySprite;
         }
     }
 }

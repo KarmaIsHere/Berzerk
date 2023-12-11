@@ -19,7 +19,7 @@ namespace Berzerk.game_objects
         protected PictureBox _bullet;
         protected Direction _viewDirection;
         System.Windows.Forms.Timer bulletTimer;
-        private IBulletUtility bulletUtility = new BulletPictureCreator();
+        private BulletPictureBoxManager bulletManager = new BulletPictureBoxManager();
         public int x { get => _bullet.Left; private set => _bullet.Left = value; }
         public int y { get => _bullet.Top; private set => _bullet.Top = value; }
 
@@ -33,7 +33,7 @@ namespace Berzerk.game_objects
 
         public void spawn(Player myPlayer, Form form)
         {
-            this._bullet = bulletUtility.createBulletPictureBox(myPlayer, form);
+            this._bullet = bulletManager.createBulletPictureBox(myPlayer, form);
             setDirection(myPlayer.getDirection());
             switch (_viewDirection)
             {

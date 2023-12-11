@@ -7,9 +7,9 @@ using static Berzerk.game_objects.Entity;
 
 namespace Berzerk.game_objects
 {
-    internal class BulletPictureCreator : IBulletUtility
+    internal class BulletPictureBoxManager
     {
-        public BulletPictureCreator() { }
+        public BulletPictureBoxManager() { }
         public PictureBox createBulletPictureBox(Player myPlayer)
         {
             var bulletPictureBox = new PictureBox();
