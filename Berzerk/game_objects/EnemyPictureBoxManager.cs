@@ -10,46 +10,46 @@ namespace Berzerk.game_objects
 {
     public class EnemyPictureBoxManager
     {
-        private PictureBox enemySprite;
+        private PictureBox _enemyPictureBox;
 
         public EnemyPictureBoxManager(Form form, int x, int y)
         {
             string projectPath = Directory.GetCurrentDirectory();
             string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\enemy.png");
-            enemySprite = new PictureBox();
-            enemySprite.Load(path);
-            enemySprite.Location = new Point(x, y);
-            enemySprite.Size = new Size(26, 47);
-            enemySprite.SizeMode = PictureBoxSizeMode.AutoSize;
-            enemySprite.TabIndex = 0;
-            enemySprite.TabStop = false;
-            enemySprite.Tag = "enemy";
-            form.Controls.Add(enemySprite);
+            _enemyPictureBox = new PictureBox();
+            _enemyPictureBox.Load(path);
+            _enemyPictureBox.Location = new Point(x, y);
+            _enemyPictureBox.Size = new Size(26, 47);
+            _enemyPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            _enemyPictureBox.TabIndex = 0;
+            _enemyPictureBox.TabStop = false;
+            _enemyPictureBox.Tag = "enemy";
+            form.Controls.Add(_enemyPictureBox);
         }
 
         public void removeEnemySprite(Form form)
         {
-            form.Controls.Remove(enemySprite);
-            enemySprite.Dispose();
+            form.Controls.Remove(_enemyPictureBox);
+            _enemyPictureBox.Dispose();
         }
 
         public Rectangle getBounds()
         {
-            return enemySprite.Bounds;
+            return _enemyPictureBox.Bounds;
         }
 
         public void dispose()
         {
-            if (enemySprite != null)
+            if (_enemyPictureBox != null)
             {
-                enemySprite.Dispose();
-                enemySprite = null;
+                _enemyPictureBox.Dispose();
+                _enemyPictureBox = null;
             }
         }
 
         public bool isEnemyBoxNull()
         {
-            return enemySprite == null ? true : false;
+            return _enemyPictureBox == null ? true : false;
         }
     }
 }
