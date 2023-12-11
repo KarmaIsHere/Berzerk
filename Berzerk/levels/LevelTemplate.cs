@@ -1,10 +1,9 @@
+using Berzerk.game_objects;
 using Berzerk.game_states;
 using Berzerk.helpers;
-using Berzerk.game_objects;
 using Berzerk.services;
 using Berzerk.services.collision;
 using Berzerk.services.controller;
-using System.Net.Http.Headers;
 
 namespace Berzerk
 {

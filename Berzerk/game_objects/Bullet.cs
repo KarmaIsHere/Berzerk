@@ -1,17 +1,4 @@
-﻿using Berzerk.helpers;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Berzerk.game_objects.Bullet;
-using static Berzerk.game_objects.Player;
-using static System.Formats.Asn1.AsnWriter;
-
-namespace Berzerk.game_objects
+﻿namespace Berzerk.game_objects
 {
     public class Bullet : Entity
     {

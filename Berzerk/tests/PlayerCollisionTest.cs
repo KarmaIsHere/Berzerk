@@ -1,13 +1,7 @@
 ﻿using Berzerk.game_objects;
-using Berzerk.services.collision;
 using Berzerk.services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Berzerk.services.collision;
 using Xunit;
-using System.Windows.Forms;
 
 namespace Berzerk.tests.services.collision
 {
@@ -27,7 +21,6 @@ namespace Berzerk.tests.services.collision
         {
             EnemyManager enemyManager = new EnemyManager();
             enemyManager.spawnEnemy(form,100,100);
-
             GameProperties game = new GameProperties();
 
             PlayerCollision playerCollision = new PlayerCollision();
