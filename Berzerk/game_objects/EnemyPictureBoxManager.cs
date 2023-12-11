@@ -54,7 +54,7 @@ namespace Berzerk.game_objects
 
         public bool isEnemyBoxNull()
         {
-            return enemySprite == null ? true : false;
+            return enemySprite == null;
         }
 
         public PictureBox getSprite()

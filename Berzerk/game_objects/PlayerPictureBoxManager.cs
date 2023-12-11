@@ -22,7 +22,7 @@ namespace Berzerk.game_objects
             string projectPath = Directory.GetCurrentDirectory();
             string path = projectPath.Replace("bin\\Debug\\net6.0-windows", "Properties\\images\\player.png");
 
-            PictureBox picture = new System.Windows.Forms.PictureBox();
+            PictureBox picture = new();
             ((System.ComponentModel.ISupportInitialize)(picture)).BeginInit();
 
             picture.Location = new System.Drawing.Point(x, y);
@@ -49,7 +49,7 @@ namespace Berzerk.game_objects
 
         public bool isEnemyBoxNull()
         {
-            return playerSprite == null ? true : false;
+            return playerSprite == null;
         }
 
         public void removeSprite(Form form)

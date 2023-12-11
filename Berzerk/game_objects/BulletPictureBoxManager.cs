@@ -10,11 +10,13 @@ namespace Berzerk.game_objects
     internal class BulletPictureBoxManager
     {
         public BulletPictureBoxManager() { }
-        public PictureBox createBulletPictureBox(Player myPlayer)
+        public static PictureBox createBulletPictureBox(Player myPlayer)
         {
-            var bulletPictureBox = new PictureBox();
-            bulletPictureBox.BackColor = Color.Yellow;
-            bulletPictureBox.Tag = "bulletEntity";
+            PictureBox bulletPictureBox = new()
+            {
+                BackColor = Color.Yellow,
+                Tag = "bulletEntity"
+            };
             switch (myPlayer.getDirection())
             {
                 case Direction.Up:
@@ -32,7 +34,7 @@ namespace Berzerk.game_objects
             }
             return bulletPictureBox;
         }
-            public PictureBox createBulletPictureBox(Player myPlayer, Form form)
+            public static PictureBox createBulletPictureBox(Player myPlayer, Form form)
     {
         var bullet = createBulletPictureBox(myPlayer);
         form.Controls.Add(bullet);

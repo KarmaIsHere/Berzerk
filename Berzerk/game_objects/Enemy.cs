@@ -10,7 +10,7 @@ namespace Berzerk.game_objects
 {
     public class Enemy : Form
     {
-        private EnemyPictureBoxManager _spriteManager;
+        private readonly EnemyPictureBoxManager _spriteManager;
 
         public Enemy(Form form, int x, int y)
         {

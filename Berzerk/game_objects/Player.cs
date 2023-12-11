@@ -19,13 +19,13 @@ namespace Berzerk.game_objects
         private bool _shooting;
         private bool _moving;
         protected Direction _viewDirection;
-        private int _playerSpeed;
+        private readonly int _playerSpeed;
         private int _ammo;
         private int _maxAmmoSize;
         private int xSpeedTick;
         private int ySpeedTick;
-        IPictureBoxManager pictureBoxManager;
-        List<Bullet> shotBullets = new List<Bullet>();
+        readonly IPictureBoxManager pictureBoxManager;
+        readonly List<Bullet> shotBullets = new();
 
         public bool goUp { get => _goUp; set => _goUp = value; }
         public bool goDown { get => _goDown; set => _goDown = value; }

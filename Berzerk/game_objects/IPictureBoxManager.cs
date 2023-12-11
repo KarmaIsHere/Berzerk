@@ -12,7 +12,6 @@ namespace Berzerk.game_objects
         void removeSprite(Form form);
         Rectangle getBounds();
         void dispose();
-
         bool isEnemyBoxNull();
         PictureBox getSprite();
     }
