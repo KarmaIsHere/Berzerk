@@ -7,59 +7,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using System.Windows.Forms;
 
 namespace Berzerk.tests.services.collision
 {
-    //public class PlayerCollisionTests
-    //{
-    //    [Fact]
-    //    public void TestCheckEnemyTouchPlayer_NoEnemies()
-    //    {
-    //        EnemyManager enemyManager = new EnemyManager();
-    //        Player myPlayer = new Player();
-    //        GameProperties game = new GameProperties();
+    public class PlayerCollisionTests
+    {
+        private Form form;
+        private Player myPlayer;
+        private IPictureBoxManager playerPictureBoxManager;
+        public PlayerCollisionTests() {
+            form = new Form();
+            playerPictureBoxManager = new PlayerPictureBoxManager(form, 100, 100);
+            myPlayer = new Player(Player.Direction.Left, 100, 100, playerPictureBoxManager);
+        }   
+        [Fact]
+        public void TestCheckEnemyTouchPlayer_NoEnemies()
+        {
+            EnemyManager enemyManager = new EnemyManager();
+            GameProperties game = new GameProperties();
 
-    //        PlayerCollision playerCollision = new PlayerCollision();
-    //        playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
+            PlayerCollision playerCollision = new PlayerCollision();
+            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
 
-    //        Assert.False(game.isOver);
-    //        Assert.False(game.isVicotry);
-    //    }
+            Assert.False(game.isOver);
+            Assert.False(game.isVicotry);
+        }
 
-    //    [Fact]
-    //    public void TestCheckEnemyTouchPlayer_EnemyTouchesPlayer()
-    //    {
-    //        EnemyManager enemyManager = new EnemyManager();
-    //        Enemy enemy = new Enemy();
-    //        enemyManager.spawnEnemy(enemy);
+        [Fact]
+        public void TestCheckEnemyTouchPlayer_EnemyTouchesPlayer()
+        {
+            EnemyManager enemyManager = new EnemyManager();
+            enemyManager.spawnEnemy(form,100,100);
 
-    //        Player myPlayer = new Player();
-    //        GameProperties game = new GameProperties();
+            GameProperties game = new GameProperties();
 
-    //        PlayerCollision playerCollision = new PlayerCollision();
-    //        playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
+            PlayerCollision playerCollision = new PlayerCollision();
+            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
 
-    //        Assert.True(game.isOver);
-    //        Assert.False(game.isVicotry);
-    //    }
+            Assert.True(game.isOver);
+            Assert.False(game.isVicotry);
+        }
 
-    //    [Fact]
-    //    public void TestCheckEnemyTouchPlayer_EnemyDoesNotTouchPlayer()
-    //    {
-    //        EnemyManager enemyManager = new EnemyManager();
-    //        Enemy enemy = new Enemy();
-    //        enemy.setPosition(new Point(200, 200));
-    //        enemyManager.spawnEnemy(enemy);
+        [Fact]
+        public void TestCheckEnemyTouchPlayer_EnemyDoesNotTouchPlayer()
+        {
+            EnemyManager enemyManager = new EnemyManager();
+            enemyManager.spawnEnemy(form, 200, 200);
+            GameProperties game = new GameProperties();
 
-    //        Player myPlayer = new Player();
-    //        myPlayer.setPosition(new Point(400, 400));
-    //        GameProperties game = new GameProperties();
+            PlayerCollision playerCollision = new PlayerCollision();
+            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
 
-    //        PlayerCollision playerCollision = new PlayerCollision();
-    //        playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
-
-    //        Assert.False(game.isOver);
-    //        Assert.False(game.isVicotry);
-    //    }
-    //}
+            Assert.False(game.isOver);
+            Assert.False(game.isVicotry);
+        }
+    }
 }
