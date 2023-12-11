@@ -4,7 +4,7 @@ namespace Berzerk.services
 {
     public class KeyBoardInput
     {
-        public void manageKeyIsDown(KeyEventArgs e, ref Player myPlayer)
+        public void ManageKeyIsDown(KeyEventArgs e, ref Player myPlayer)
         {
             if (e.KeyCode == Keys.Up && myPlayer.Moving == false)
             {
@@ -31,7 +31,7 @@ namespace Berzerk.services
                 myPlayer.Shooting = true;
             }
         }
-        public void manageKeyIsUp(KeyEventArgs e, ref Player myPlayer)
+        public void ManageKeyIsUp(KeyEventArgs e, ref Player myPlayer)
         {
             if (e.KeyCode == Keys.Up)
             {

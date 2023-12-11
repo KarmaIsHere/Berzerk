@@ -17,9 +17,9 @@ namespace Berzerk.tests
             int y = 100;
 
             EnemyManager enemyManager = new EnemyManager();
-            enemyManager.spawnEnemy(form, x, y);
+            enemyManager.SpawnEnemy(form, x, y);
 
-            Assert.Equal(expectedEnemies, enemyManager.enemyCount);
+            Assert.Equal(expectedEnemies, enemyManager.EnemyCount);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Berzerk.tests
             int sceneWidth = 1000;
 
             enemyManager = new EnemyManager();
-            enemyManager.spawnEnemies(form, amountOfEnemies, sceneHeight, sceneWidth);
+            enemyManager.SpawnEnemies(form, amountOfEnemies, sceneHeight, sceneWidth);
             int result = enemyManager.enemies.Count;
 
             Assert.Equal(expectedCount, result);
@@ -48,13 +48,13 @@ namespace Berzerk.tests
             int sceneWidth = 1000;
 
             enemyManager = new EnemyManager();
-            enemyManager.spawnEnemies(form, amountOfEnemies, sceneHeight, sceneWidth);
+            enemyManager.SpawnEnemies(form, amountOfEnemies, sceneHeight, sceneWidth);
             int result = enemyManager.enemies.Count;
             bool enemyShot = true;
             FlagCheck flagCheck = new FlagCheck();
             flagCheck.enemyShot = enemyShot;
 
-            enemyManager.checkDeadEnemies(ref flagCheck);
+            enemyManager.CheckDeadEnemies(ref flagCheck);
 
             Assert.False(result == expectedCount);
         }

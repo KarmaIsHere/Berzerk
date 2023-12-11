@@ -4,7 +4,7 @@ namespace Berzerk.utility
 {
     public class entitySpawner
     {
-        public static void spawnEnemies(Form form, ref Enemy? enemy, ref List<Enemy> enemies)
+        public static void SpawnEnemies(Form form, ref Enemy? enemy, ref List<Enemy> enemies)
         {
             enemy = new Enemy(form, 300, 321);
             enemies.Add(enemy);

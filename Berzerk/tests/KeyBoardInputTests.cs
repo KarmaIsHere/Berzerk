@@ -18,111 +18,111 @@ namespace Berzerk.tests.services
             keyBoardInput = new KeyBoardInput();
         }
         [Fact]
-        public void manageKeyIsDownShouldGoUp()
+        public void ManageKeyIsDownShouldGoUp()
         {
 
             KeyEventArgs e = new KeyEventArgs(Keys.Up);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsDown(e, ref myPlayer);
 
             Assert.True(myPlayer.GoUp);
             Assert.True(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldGoDown()
+        public void ManageKeyIsDownShouldGoDown()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Down);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsDown(e, ref myPlayer);
 
             Assert.True(myPlayer.GoDown);
             Assert.True(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldGoLeft()
+        public void ManageKeyIsDownShouldGoLeft()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Left);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsDown(e, ref myPlayer);
 
             Assert.True(myPlayer.GoLeft);
             Assert.True(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldGoRight()
+        public void ManageKeyIsDownShouldGoRight()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Right);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsDown(e, ref myPlayer);
 
             Assert.True(myPlayer.GoRight);
             Assert.True(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldShoot()
+        public void ManageKeyIsDownShouldShoot()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Space);
 
-            keyBoardInput.manageKeyIsDown(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsDown(e, ref myPlayer);
 
             Assert.True(myPlayer.Shooting);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldNotGoUp()
+        public void ManageKeyIsDownShouldNotGoUp()
         {
 
             KeyEventArgs e = new KeyEventArgs(Keys.Up);
 
-            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsUp(e, ref myPlayer);
 
             Assert.False(myPlayer.GoUp);
             Assert.False(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldNotGoDown()
+        public void ManageKeyIsDownShouldNotGoDown()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Down);
 
-            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsUp(e, ref myPlayer);
 
             Assert.False(myPlayer.GoDown);
             Assert.False(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldNotGoLeft()
+        public void ManageKeyIsDownShouldNotGoLeft()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Left);
 
-            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsUp(e, ref myPlayer);
 
             Assert.False(myPlayer.GoLeft);
             Assert.False(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldNotGoRight()
+        public void ManageKeyIsDownShouldNotGoRight()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Right);
 
-            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsUp(e, ref myPlayer);
 
             Assert.False(myPlayer.GoRight);
             Assert.False(myPlayer.Moving);
         }
 
         [Fact]
-        public void manageKeyIsDownShouldNotShoot()
+        public void ManageKeyIsDownShouldNotShoot()
         {
             KeyEventArgs e = new KeyEventArgs(Keys.Space);
 
-            keyBoardInput.manageKeyIsUp(e, ref myPlayer);
+            keyBoardInput.ManageKeyIsUp(e, ref myPlayer);
 
             Assert.False(myPlayer.Shooting);
         }

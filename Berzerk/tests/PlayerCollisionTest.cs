@@ -21,28 +21,28 @@ namespace Berzerk.tests.services.collision
         public void checkEnemyTouchPlayerShouldEnemyTouchPlayer()
         {
             EnemyManager enemyManager = new EnemyManager();
-            enemyManager.spawnEnemy(form, 100, 100);
+            enemyManager.SpawnEnemy(form, 100, 100);
             GameProperties game = new GameProperties();
 
             PlayerCollision playerCollision = new PlayerCollision();
-            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
+            playerCollision.CheckEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
 
-            Assert.True(game.isOver);
-            Assert.False(game.isVicotry);
+            Assert.True(game.IsOver);
+            Assert.False(game.IsVicotry);
         }
 
         [Fact]
         public void checkEnemyTouchPlayerShouldEnemyDoesNotTouchPlayer()
         {
             EnemyManager enemyManager = new EnemyManager();
-            enemyManager.spawnEnemy(form, 200, 200);
+            enemyManager.SpawnEnemy(form, 200, 200);
             GameProperties game = new GameProperties();
 
             PlayerCollision playerCollision = new PlayerCollision();
-            playerCollision.checkEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
+            playerCollision.CheckEnemyTouchPlayer(ref enemyManager, ref myPlayer, ref game);
 
-            Assert.False(game.isOver);
-            Assert.False(game.isVicotry);
+            Assert.False(game.IsOver);
+            Assert.False(game.IsVicotry);
         }
     }
 }

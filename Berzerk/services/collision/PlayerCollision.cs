@@ -4,14 +4,14 @@ namespace Berzerk.services.collision
 {
     public class PlayerCollision
     {
-        public void checkEnemyTouchPlayer(ref EnemyManager enemyManager, ref Player myPlayer, ref GameProperties game)
+        public void CheckEnemyTouchPlayer(ref EnemyManager enemyManager, ref Player myPlayer, ref GameProperties game)
         {
-            foreach (Enemy enemy in enemyManager.getEnemies())
+            foreach (Enemy enemy in enemyManager.GetEnemies())
             {
                 if (enemy.IsEnemyBoxNull() == false && enemy.GetBounds().IntersectsWith(myPlayer.GetBounds()))
                 {
-                    game.isOver = true;
-                    game.isVicotry = false;
+                    game.IsOver = true;
+                    game.IsVicotry = false;
                 }
             }
         }
