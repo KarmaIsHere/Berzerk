@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Berzerk.game_objects.Entity;
+﻿using static Berzerk.game_objects.Entity;
 
 namespace Berzerk.game_objects
 {
